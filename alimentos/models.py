@@ -6,9 +6,9 @@ class Productos(models.Model):
     description = models.CharField(max_length=200)
     sku = models.IntegerField()
     price = models.FloatField()
-    def __str__(self):
-        return self.name
-        return self.description
+    # def __str__(self):
+    #     return self.name
+    #     return self.description
 
 class Bebidas(models.Model):
     name = models.CharField(max_length=50)
