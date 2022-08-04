@@ -13,3 +13,14 @@ def alimentos(request):
     return render(request, 'alimentos.html', context=context)
 
 
+def lista_alimentos(request):
+    
+    all = Productos.objects.all() 
+     
+    context ={
+        'lista' : all
+    }
+    return render(request,'alimentos.html', context = context)
+
+
+
