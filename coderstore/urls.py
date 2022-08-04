@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from coderstore.views import inicio
-from alimentos.views import alimentos
+from alimentos.views import alimentos, lista_alimentos
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', inicio, name='inicio'),
-    path('alimentos/', alimentos, name='alimentos'),
+    path('alimentos/', lista_alimentos, name='alimentos'),
     
 ]
