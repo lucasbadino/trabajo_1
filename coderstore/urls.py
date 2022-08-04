@@ -21,5 +21,6 @@ from alimentos.views import alimentos
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', inicio, name='inicio'),
-    path('alimentos/', alimentos, name='alimentos')
+    path('alimentos/', alimentos, name='alimentos'),
+    ahsdvgdn
 ]
