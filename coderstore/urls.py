@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from coderstore.views import inicio
+from alimentos.views import alimentos
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', inicio, name='inicio')
+    path('', inicio, name='inicio'),
+    path('alimentos/', alimentos, name='alimentos')
 ]
