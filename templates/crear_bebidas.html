@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{%block titulo%}
+Creador de bebidas
+{%endblock%}
+
+{%block texto%}
+
+
+
+<form action="" method='POST'>
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+
+    </table>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+{% endblock %}

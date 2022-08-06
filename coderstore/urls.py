@@ -20,6 +20,8 @@ from alimentos.views import alimentos, lista_alimentos
 from bebidas.views import bebidas  , lista_bebidas
 from panificacion.views import *
 from alimentos.views import form_carne
+from panificacion.views import form_panes
+from bebidas.views import form_bebidas
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +30,6 @@ urlpatterns = [
     path('bebidas/', lista_bebidas, name='bebidas'),
     path('panes/', lista_panes, name= 'panes'),
     path('crear-carnes/', form_carne, name = 'crear-carnes'),
-    
+    path('crear-panes/', form_panes, name = 'crear-panes'),
+    path('crear-bebidas/', form_bebidas, name = 'crear-bebidas'),
 ]

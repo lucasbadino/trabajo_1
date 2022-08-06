@@ -2,14 +2,14 @@
 	{%block titulo%}
 		Creador de carne
 	{%endblock%}
-	
+
 		{%block texto%}
 
 
 
 <form action=""method= 'POST'>
 {% csrf_token %}
-<table> 
+<table>
     {{form.as_table}}
 
 </table>

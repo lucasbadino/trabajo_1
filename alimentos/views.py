@@ -1,9 +1,7 @@
-from contextvars import Context
-from importlib.resources import contents
 from django.shortcuts import render, redirect
 from alimentos.models import *
 from random import randint
-from django.templatetags.static import static 
+from django.templatetags.static import static
 from alimentos.forms import Formulario_carnes
 # Create your views here.
 
@@ -17,9 +15,9 @@ def alimentos(request):
 
 
 def lista_alimentos(request):
-    
-    all = Productos.objects.all() 
-     
+
+    all = Productos.objects.all()
+
     context ={
         'lista' : all
     }
