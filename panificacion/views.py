@@ -1,20 +1,23 @@
 from django.shortcuts import render
+from random import randint
+from panificacion.models import Panes
+
 
 def panes(request):
     rand = randint(0, 2000)
-    al1 = Productos.objects.create(name = 'Carne', description = 'Carne de ternera', sku = rand, price = 2000)
+    al1 = Panes.objects.create(name = 'Pan Frances', description = 'baguette', sku = rand, price = 50)
     context = {
-        'carne': al1
+        'pan': al1
     }
-    return render(request, 'alimentos.html', context=context)
+    return render(request, 'panes.html', context=context)
 
 
 def lista_panes(request):
     
-    all = Productos.objects.all() 
+    all = Panes.objects.all() 
      
     context ={
         'lista' : all
     }
-    return render(request,'alimentos.html', context = context)
+    return render(request,'panes.html', context = context)
 
