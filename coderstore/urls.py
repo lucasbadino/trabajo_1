@@ -33,5 +33,5 @@ urlpatterns = [
     path('crear-carnes/', form_carne, name = 'crear-carnes'),
     path('crear-panes/', form_panes, name = 'crear-panes'),
     path('crear-bebidas/', form_bebidas, name = 'crear-bebidas'),
-    path('buscar/',buscar_productos, name='buscar-productos' ),
+    path('buscar/',buscar_productos, name='buscar-productos'),
 ]

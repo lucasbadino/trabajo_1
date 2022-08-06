@@ -8,12 +8,13 @@ def inicio(request):
 
 
 def buscar_productos(request):
-    search = request.GET['search']
-    carne = Productos.object.filter(name__icontains = search)
-   # bebida = Bebidas.object.filter(name__icontains = search)
-   # panes = Panes.object.filter(name__icontains = search)
-    context = {	
-        'carnes': carne
-                      }
-    return render(request, 'search_product.html', context = context)
+   search = request.GET['search']
+   carne = Productos.objects.filter(name__icontains = search)
+   bebida = Bebidas.objects.filter(name__icontains = search)
+   panes = Panes.objects.filter(name__icontains = search)
+   dic = carne.union(bebida, panes)
+   context = {	
+       'carne': dic
+                     }
+   return render(request, 'search_product.html', context = context)
 
