@@ -1,14 +1,10 @@
 from django.db import models
 
+# Create your models here.
 
-class Productos(models.Model):
+class Bebidas(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
     sku = models.IntegerField()
     price = models.FloatField()
-    # def __str__(self):
-    #     return self.name
-    #     return self.description
-
-
-
+    category = models.CharField(max_length=60)

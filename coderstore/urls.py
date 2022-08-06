@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from coderstore.views import inicio
 from alimentos.views import alimentos, lista_alimentos
+from bebidas.views import bebidas  , lista_bebidas
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', inicio, name='inicio'),
     path('alimentos/', lista_alimentos, name='alimentos'),
+    path('bebidas/', lista_bebidas, name='bebidas'),
     
 ]
