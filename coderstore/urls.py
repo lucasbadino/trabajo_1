@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from coderstore.views import inicio
+from coderstore.views import inicio, buscar_productos
 from alimentos.views import alimentos, lista_alimentos
 from bebidas.views import bebidas  , lista_bebidas
 from panificacion.views import *
 from alimentos.views import form_carne
 from panificacion.views import form_panes
 from bebidas.views import form_bebidas
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,4 +33,5 @@ urlpatterns = [
     path('crear-carnes/', form_carne, name = 'crear-carnes'),
     path('crear-panes/', form_panes, name = 'crear-panes'),
     path('crear-bebidas/', form_bebidas, name = 'crear-bebidas'),
+    path('buscar/',buscar_productos, name='buscar-productos' ),
 ]
