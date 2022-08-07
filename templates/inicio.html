@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
+    {% block link %}
+      <link type="text/css" href="{% static '/css/style.css' %}" rel="stylesheet" />
+    {%endblock%}
 
     {% block titulo%}
 
