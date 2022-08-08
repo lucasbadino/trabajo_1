@@ -15,27 +15,27 @@
 
     {%block texto%}
     <main>
-        <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
+        <div class="container-fluid bg-trasparent my-4 p-3" >
             <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
     
     {% for i in carne %} 
-    <div class="col">
+    <div class="col" style= "margin:2%">
         <div class="card h-100 shadow-sm"> <img
                 src='https://media.discordapp.net/attachments/1004393238276362365/1005986351855964250/coderhouse-logo.png'
                 class="card-img-top" alt="...">
-            <div class="card-body">
+            <div class="card-body" style= "margin-bottom:20%;">
                 <div class="clearfix mb-3"> <span>
                         <h1>{{i.name}}</h1>
                     </span> <span class="float-end price-hp">
                         <br>&dollar;{{i.price}}</span> </div>
                         <h5 class="card-title">{{i.description}}</h5>
                 <h5 class="card-title">stock: {{i.stock}}</h5>
-                <h5 class="card-title">sku: {{i.sku}}</h5>
-
-                <div class="align-self-end btn btn-lg btn-block btn-primary" > <a href="#" class="btn btn-warning"  >Comprar</a> </div>
+                <h5 class="card-title">sku: {{i.sku}}</h5>      
+                <div class="text-center my-4" > <a href="#" class="btn btn-warning" style="position:absolute; left:35%; bottom:1%;">Comprar</a> </div>
             </div>
         </div>
-    </div>
+        </div>
+   
 
 
     {% endfor %}
