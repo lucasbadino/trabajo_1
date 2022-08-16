@@ -42,4 +42,39 @@ def form_carne(request):
     return render(request, 'crear_carnes.html', context=context)
 
 
+def actualizar_carne(request, pk):
+    if request.method == 'POST':
+        form = Formulario_carnes(request.POST)
+        if form.is_valid():
+            producto = Productos.objects.get(id=pk)
+            producto.name = form.cleaned_data['name']
+            producto.price = form.cleaned_data['price']
+            producto.description = form.cleaned_data['description']
+            producto.stock = form.cleaned_data['stock']
+            producto.save()
 
+            return redirect(lista_alimentos)
+
+    elif request.method == 'GET':
+        producto = Productos.objects.get(id=pk)
+
+        form = Formulario_carnes (initial={
+            'name': producto.name,
+            'price': producto.price,
+            'description': producto.description,
+            'stock': producto.stock})
+        context = {'form': form}
+        return render(request, 'editar_carnes.html', context=context)
+
+
+
+
+def borrar_carnes(request, pk):
+    if request.method == 'GET':
+        producto = Productos.objects.get(pk=pk)
+        context = {'producto': producto}
+        return render(request, 'borrar_carnes.html', context=context)
+    elif request.method == 'POST':
+        producto = Productos.objects.get(pk=pk)
+        producto.delete()
+        return redirect(lista_alimentos)

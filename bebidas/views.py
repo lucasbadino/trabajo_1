@@ -41,3 +41,39 @@ def form_bebidas(request):
             'form': form
         }
     return render(request, 'crear_bebidas.html', context=context)
+
+
+def actualizar_bebidas(request, pk):
+    if request.method == 'POST':
+        form = Formulario_bebidas(request.POST)
+        if form.is_valid():
+            producto = Bebidas.objects.get(id=pk)
+            producto.name = form.cleaned_data['name']
+            producto.price = form.cleaned_data['price']
+            producto.description = form.cleaned_data['description']
+            producto.stock = form.cleaned_data['stock']
+            producto.save()
+
+            return redirect(lista_bebidas)
+
+    elif request.method == 'GET':
+        producto = Bebidas.objects.get(id=pk)
+
+        form = Formulario_bebidas(initial={
+            'name': producto.name,
+            'price': producto.price,
+            'description': producto.description,
+            'stock': producto.stock})
+        context = {'form': form}
+        return render(request, 'editar_bebidas.html', context=context)
+
+
+def borrar_bebidas(request, pk):
+    if request.method == 'GET':
+        producto = Bebidas.objects.get(pk=pk)
+        context = {'producto': producto}
+        return render(request, 'borrar_bebidas.html', context=context)
+    elif request.method == 'POST':
+        producto = Bebidas.objects.get(pk=pk)
+        producto.delete()
+        return redirect(lista_bebidas)

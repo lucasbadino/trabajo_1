@@ -12,7 +12,6 @@ Alimentos
     <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
         <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
 {% for i in lista %}
-
             
             <div class="col" style= "margin-top:-5%; margin:2%">
                 <div class="card h-100 shadow-sm" > <img
@@ -27,6 +26,8 @@ Alimentos
                         <h5 class="card-title">stock: {{i.stock}}</h5>
                         <h5 class="card-title">sku: {{i.sku}}</h5>
                         <div class="text-center my-4"> <a href="#" class="btn btn-warning">Comprar</a> </div>
+                        <div class="text-center my-4"> <a href="http://127.0.0.1:8000/editar-carnes/{{i.id}}" class="btn btn-warning">Editar</a> </div>
+                        <div class="text-center my-4"> <a href="http://127.0.0.1:8000/borrar-carnes/{{i.id}}" class="btn btn-warning">Borrar</a> </div>
                     </div>
                 </div>
             </div>
