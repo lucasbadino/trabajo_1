@@ -2,7 +2,7 @@
 
 {% block titulo%}
 
-Panaderia
+Bebidas
 
 {% endblock %}
 
@@ -11,13 +11,13 @@ Panaderia
 <main>
     <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
         <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
-            {% for i in lista %}
+{% for i in lista %}
 
 
             <div class="col" style= "margin-top:-5%; margin:2%">
                 <div class="card h-100 shadow-sm"> <img
-                        src='https://images-ext-2.discordapp.net/external/svfncM6zVx01MCKTJHBgx4QzJf2iQZXELGg2z5Ia3D8/https/cdn.vox-cdn.com/thumbor/O3EfkTeAegDUb2a1WOdqRa8NJIE%3D/0x0%3A2000x1338/1200x900/filters%3Afocal%28840x509%3A1160x829%29/cdn.vox-cdn.com/uploads/chorus_image/image/64752130/564035741.jpg.0.jpg?width=630&height=473' class="card-img-top"
-                        alt="...">
+                        src='https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQOQBrwOgfmr8sCNET4DKpFvclRKknud5k1RbLFLCSmVImln4BLqEzVOiGVVubXdfN3gBqmrxdtHA&usqp=CAc'
+                        class="card-img-top" alt="" >
                     <div class="card-body">
                         <div class="clearfix mb-3"> <span>
                                 <h1>{{i.name}}</h1>
@@ -26,17 +26,19 @@ Panaderia
                         <h5 class="card-title">{{i.description}}</h5>
                         <h5 class="card-title">codigo: {{i.sku}}</h5>
                         <div class="text-center my-4"> <a href="#" class="btn btn-warning">Comprar</a> </div>
-                        <div class="text-center my-4"> <a href="http://127.0.0.1:8000/editar-panes/{{i.id}}" class="btn btn-warning">Editar</a></div>
-                        <div class="text-center my-4"> <a href="http://127.0.0.1:8000/borrar-panes/{{i.id}}" class="btn btn-warning">Borrar</a></div>
+                        <div class="text-center my-4"> <a href="/bebidas/editar-bebidas/{{i.id}}" class="btn btn-warning">Editar</a></div>
+                        <div class="text-center my-4"> <a href="/bebidas/borrar-bebidas/{{i.id}}" class="btn btn-warning">Borrar</a></div>
                     </div>
                 </div>
             </div>
-            {% endfor %}
-        </div>
-       </div>
+
        
-       </main>
-       
-       
-       
-       {% endblock %}
+{% endfor %}
+ </div>
+</div>
+
+</main>
+
+
+
+{% endblock %}

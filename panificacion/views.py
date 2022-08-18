@@ -11,7 +11,7 @@ def panes(request):
     context = {
         'pan': al1
     }
-    return render(request, 'panes.html', context=context)
+    return render(request, 'panes/panes.html/', context=context)
 
 
 def lista_panes(request):
@@ -21,7 +21,7 @@ def lista_panes(request):
     context ={
         'lista' : all
     }
-    return render(request,'panes.html', context = context)
+    return render(request,'panes/panes.html/', context = context)
 
 def form_panes(request):
     if request.method == 'POST':
@@ -39,7 +39,7 @@ def form_panes(request):
         context = {
             'form': form
         }
-    return render(request, 'crear_panes.html', context=context)
+    return render(request, 'panes/crear_panes.html/', context=context)
 
 def actualizar_panes(request, pk):
     if request.method == 'POST':
@@ -63,14 +63,14 @@ def actualizar_panes(request, pk):
             'description': producto.description,
             'stock': producto.stock})
         context = {'form': form}
-        return render(request, 'editar_panes.html', context=context)
+        return render(request, 'panes/editar_panes.html/', context=context)
 
 
 def borrar_panes(request, pk):
     if request.method == 'GET':
         producto = Panes.objects.get(pk=pk)
         context = {'producto': producto}
-        return render(request, 'borrar_panes.html', context=context)
+        return render(request, 'panes/borrar_panes.html', context=context)
     elif request.method == 'POST':
         producto = Panes.objects.get(pk=pk)
         producto.delete()

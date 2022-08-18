@@ -11,7 +11,7 @@ def alimentos(request):
     context = {
         'carne': al1
     }
-    return render(request, 'alimentos.html', context=context)
+    return render(request, 'carnes/alimentos.html', context=context)
 
 
 def lista_alimentos(request):
@@ -21,7 +21,7 @@ def lista_alimentos(request):
     context ={
         'lista' : all
     }
-    return render(request,'alimentos.html', context = context)
+    return render(request,'carnes/alimentos.html', context = context)
 
 def form_carne(request):
     if request.method == 'POST':
@@ -39,7 +39,7 @@ def form_carne(request):
         context = {
             'form': form
         }
-    return render(request, 'crear_carnes.html', context=context)
+    return render(request, 'carnes/crear_carnes.html', context=context)
 
 
 def actualizar_carne(request, pk):
@@ -64,7 +64,7 @@ def actualizar_carne(request, pk):
             'description': producto.description,
             'stock': producto.stock})
         context = {'form': form}
-        return render(request, 'editar_carnes.html', context=context)
+        return render(request, 'carnes/editar_carnes.html', context=context)
 
 
 
@@ -73,7 +73,7 @@ def borrar_carnes(request, pk):
     if request.method == 'GET':
         producto = Productos.objects.get(pk=pk)
         context = {'producto': producto}
-        return render(request, 'borrar_carnes.html', context=context)
+        return render(request, 'carnes/borrar_carnes.html', context=context)
     elif request.method == 'POST':
         producto = Productos.objects.get(pk=pk)
         producto.delete()

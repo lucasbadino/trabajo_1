@@ -12,7 +12,7 @@ def bebidas(request):
     context = {
         'bebida': al1
     }
-    return render(request, 'bebidas.html', context=context)
+    return render(request, 'bebidas/bebidas.html', context=context)
 
 
 def lista_bebidas(request):
@@ -22,7 +22,7 @@ def lista_bebidas(request):
     context ={
         'lista' : all
     }
-    return render(request,'bebidas.html', context = context)
+    return render(request,'bebidas/bebidas.html', context = context)
 
 def form_bebidas(request):
     if request.method == 'POST':
@@ -40,7 +40,7 @@ def form_bebidas(request):
         context = {
             'form': form
         }
-    return render(request, 'crear_bebidas.html', context=context)
+    return render(request, 'bebidas/crear_bebidas.html', context=context)
 
 
 def actualizar_bebidas(request, pk):
@@ -65,14 +65,14 @@ def actualizar_bebidas(request, pk):
             'description': producto.description,
             'stock': producto.stock})
         context = {'form': form}
-        return render(request, 'editar_bebidas.html', context=context)
+        return render(request, 'bebidas/editar_bebidas.html', context=context)
 
 
 def borrar_bebidas(request, pk):
     if request.method == 'GET':
         producto = Bebidas.objects.get(pk=pk)
         context = {'producto': producto}
-        return render(request, 'borrar_bebidas.html', context=context)
+        return render(request, 'bebidas/borrar_bebidas.html', context=context)
     elif request.method == 'POST':
         producto = Bebidas.objects.get(pk=pk)
         producto.delete()
