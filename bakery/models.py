@@ -9,3 +9,7 @@ class Bakeries(models.Model):
     sku = models.IntegerField(default= rand)
     price = models.FloatField()
     stock = models.IntegerField(default= 0)
+
+       
+    def __str__(self):
+        return self.name, self.description

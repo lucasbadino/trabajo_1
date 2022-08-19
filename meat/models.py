@@ -12,5 +12,5 @@ class Products(models.Model):
     stock = models.IntegerField(default= 0)
     
     def __str__(self):
-        return self.name
-        return self.description
+        return self.name, self.description
+

@@ -18,3 +18,5 @@ def search_products(request):
                      }
    return render(request, '/search_product.html', context = context)
 
+def index(request):
+   return render(request, 'index.html', context={})
