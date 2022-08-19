@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+    {% block link %}
+      <link type="text/css" href="{% static '/css/style.css' %}" rel="stylesheet" />
+    {%endblock%}
+
+    {% block title%}
+
+    Inicio
+
+    {% endblock %}
+
+	{%block text%}
+
+    <ul class="list-unstyled" >
+        <li class="media">
+            <a href="meat/meats/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ334fEdikNuD16oRp5h5mWXFIf1nV5iIEW8g&usqp=CAU"  class="mr-3" alt="...">
+          
+          <div class="media-body">
+            <h5 class="mt-0 mb-1">Carnes Premium</h5>
+        </a>
+          </div>
+        </li>
+    
+        <li class="media my-4">
+            <a href="drink/drinks/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3Amgs4ORtPaZz6gR37D6jDMqWAyAPGo8DvQ&usqp=CAU" class="mr-3" alt="...">
+          <div class="media-body">
+            <h5 class="mt-0 mb-1">Bebidas</h5>
+        </a>
+          </div>
+        </li>
+        <li class="media">
+            <a href="bakery/bakeries"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxlLdfCGd6EqCUqS5ZhHTMCpykiWRtkJloaA&usqp=CAU" class="mr-3" alt="...">
+          <div class="media-body">
+            <h5 class="mt-0 mb-1">Panaderia</h5>
+        </a>
+          </div>
+        </li>
+      </ul>
+
+    {% endblock %}

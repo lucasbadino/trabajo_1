@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{%block title%}
+Borrar Carnes
+{%endblock%}
+
+{%block text%}
+
+<p>Nombre del Producto:{{producto.name}}</p>
+
+<form action="" method='POST' style="margin-left: 35% ; margin-top: 7%; margin-bottom: 10%; ">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Borrar</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{%block title%}
+Creador de panes
+{%endblock%}
+
+{%block text%}
+
+
+
+<form action="" method='POST'style="margin-left: 35% ; margin-top: 7%; margin-bottom: 10%; ">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+
+    </table>
+
+    <button type="submit" class="btn btn-primary">Crear</button>
+</form>
+
+{% endblock %}

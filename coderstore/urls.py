@@ -15,16 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from coderstore.views import inicio, buscar_productos
-from panificacion.views import *
+from coderstore.views import home_page, search_products
+from meat.views import *
+
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', inicio, name='inicio'),
-    path('carnes/', include('alimentos.urls')),
-    path('bebidas/', include('bebidas.urls')),
-    path('panes/', include('panificacion.urls')),
-    path('buscar/',buscar_productos, name='buscar-productos'),
+    path('', home_page, name='home-page'),
+    path('meat/', include('meat.urls')),
+    path('drink/', include('drink.urls')),
+    path('bakery/', include('bakery.urls')),
+    path('search/',search_products, name='search-products'),
 ]
