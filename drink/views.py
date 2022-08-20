@@ -80,12 +80,7 @@ def delete_drinks(request, pk):
         product.delete()
         return redirect(list_drinks)
 
-
-#class List_drinks(ListView):
-#    model = Drinks
- #   template_name= 'drink/list_drinks.html'
-
-
-class Detail_dricks(DetailView):
+class Detail_drinks(DetailView):
     model = Drinks
     template_name = 'drink/detail_drinks.html'
+    
