@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 from random import randint
 # Create your models here.
@@ -11,5 +12,7 @@ class Drinks(models.Model):
     stock = models.IntegerField(default= 0)
     
     def __str__(self):
-        return self.name, self.description
+        return self.name
         
+    class Meta:
+        verbose_name_plural = 'Drinks'

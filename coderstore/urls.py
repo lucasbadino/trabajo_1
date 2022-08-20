@@ -22,11 +22,11 @@ from coderstore.views import home_page, search_products, index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home_page/', home_page, name='home_page'),
+    path('', index, name='index'),
     path('meat/', include('meat.urls')),
     path('drink/', include('drink.urls')),
     path('bakery/', include('bakery.urls')),
     path('search/',search_products, name='search-products'),
-    path('', index, name='index'),
+    path('inicio', home_page, name='inicio'),
     path('user/', include('users.urls')),
 ]

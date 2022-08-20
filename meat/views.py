@@ -3,6 +3,7 @@ from meat.models import *
 from random import randint
 from django.templatetags.static import static
 from meat.forms import Form_meats
+from django.views.generic import DetailView
 # Create your views here.
 
 def meats(request):
@@ -78,3 +79,6 @@ def delete_meats(request, pk):
         product = Products.objects.get(pk=pk)
         product.delete()
         return redirect(list_of_meats)
+class Detail_Products(DetailView):
+    model = Products
+    template_name = 'meat/detail_meats.html'

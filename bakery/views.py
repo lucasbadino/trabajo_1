@@ -3,7 +3,7 @@ from random import randint
 from bakery.models import Bakeries
 from bakery.forms import Form_bakeries
 from django.templatetags.static import static
-
+from django.views.generic import DetailView
 
 def bakeries(request):
     rand = randint(0, 2000)
@@ -75,3 +75,7 @@ def delete_bakeries(request, pk):
         product = Bakeries.objects.get(pk=pk)
         product.delete()
         return redirect(list_bakeries)
+
+class Detail_bakeries(DetailView):
+    model = Bakeries
+    template_name = 'bakery/detail_bakeries.html'

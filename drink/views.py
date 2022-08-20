@@ -1,6 +1,7 @@
+from django.views.generic import DetailView
 from django.shortcuts import render, redirect
 from django.shortcuts import render, redirect
-from drink.models import *
+from drink.models import  *
 from random import randint
 from drink.forms import Form_drinks
 from django.templatetags.static import static
@@ -78,3 +79,13 @@ def delete_drinks(request, pk):
         product = Drinks.objects.get(pk=pk)
         product.delete()
         return redirect(list_drinks)
+
+
+#class List_drinks(ListView):
+#    model = Drinks
+ #   template_name= 'drink/list_drinks.html'
+
+
+class Detail_dricks(DetailView):
+    model = Drinks
+    template_name = 'drink/detail_drinks.html'
