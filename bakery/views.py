@@ -4,7 +4,7 @@ from bakery.models import Bakeries
 from bakery.forms import Form_bakeries
 from django.templatetags.static import static
 from django.views.generic import DetailView
-
+from django.contrib.auth.decorators import login_required
 def bakeries(request):
     rand = randint(0, 2000)
     al1 = Bakeries.objects.create(name = 'Pan Frances', description = 'baguette', sku = rand, price = 50)
@@ -13,7 +13,7 @@ def bakeries(request):
     }
     return render(request, 'bakery/bakeries.html/', context=context)
 
-
+@login_required
 def list_bakeries(request):
 
     all = Bakeries.objects.all()

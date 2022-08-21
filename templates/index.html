@@ -11,6 +11,7 @@
     {% endblock %}
 
     {%block text%}
-<h1>index</h1>
-
+{% if message %}
+<h1>{{message}}</h1>
+{% endif %}
     {% endblock %}
