@@ -69,9 +69,9 @@
 
         {% if request.user.is_authenticated %}
 
-        
+        <div id="container">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false" style="margin-left: 10rem">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false" style="margin-left:180% " >
               Perfil
             </a>
             <ul class="dropdown-menu" >
@@ -90,6 +90,7 @@
 
 
           {%endif%}
+        </div>
         </ul>
       </ul>
       <form class="d-flex" action="/search/" method="GET" >
