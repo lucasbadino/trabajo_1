@@ -4,6 +4,8 @@ from random import randint
 from django.templatetags.static import static
 from meat.forms import Form_meats
 from django.views.generic import DetailView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 def meats(request):
@@ -42,7 +44,7 @@ def form_meats(request):
         }
     return render(request, 'meat/create_meats.html', context=context)
 
-
+@login_required
 def edit_meats(request, pk):
     if request.method == 'POST':
         form = Form_meats(request.POST)
@@ -69,7 +71,7 @@ def edit_meats(request, pk):
 
 
 
-
+@login_required
 def delete_meats(request, pk):
     if request.method == 'GET':
         product = Products.objects.get(pk=pk)
@@ -79,6 +81,6 @@ def delete_meats(request, pk):
         product = Products.objects.get(pk=pk)
         product.delete()
         return redirect(list_of_meats)
-class Detail_Products(DetailView):
+class Detail_Products(LoginRequiredMixin, DetailView):
     model = Products
     template_name = 'meat/detail_meats.html'

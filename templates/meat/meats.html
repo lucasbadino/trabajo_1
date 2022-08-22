@@ -26,8 +26,10 @@ Alimentos
                         <h5 class="card-title">stock: {{i.stock}}</h5>
                         <h5 class="card-title">sku: {{i.sku}}</h5>
                         <div class="text-center my-4"> <a href="#" class="btn btn-warning">Comprar</a> </div>
+                        {% if request.user.is_superuser %}
                         <div class="text-center my-4"> <a href="/meat/edit-meats/{{i.id}}" class="btn btn-warning">Editar</a> </div>
                         <div class="text-center my-4"> <a href="/meat/delete-meats/{{i.id}}" class="btn btn-warning">Borrar</a> </div>
+                        {% endif %}
                         <div class="text-center my-4"> <a href="/meat/detail-meats/{{i.id}}" class="btn btn-warning">Mas informacion</a> </div>
                     </div>
                 </div>

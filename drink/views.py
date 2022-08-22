@@ -5,6 +5,8 @@ from drink.models import  *
 from random import randint
 from drink.forms import Form_drinks
 from django.templatetags.static import static
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -44,7 +46,7 @@ def form_drinks(request):
         }
     return render(request, 'drink/create_drinks.html', context=context)
 
-
+@login_required
 def edit_drinks(request, pk):
     if request.method == 'POST':
         form = Form_drinks(request.POST)
@@ -69,7 +71,7 @@ def edit_drinks(request, pk):
         context = {'form': form}
         return render(request, 'drink/edit_drinks.html', context=context)
 
-
+@login_required
 def delete_drinks(request, pk):
     if request.method == 'GET':
         product = Drinks.objects.get(pk=pk)
@@ -80,7 +82,7 @@ def delete_drinks(request, pk):
         product.delete()
         return redirect(list_drinks)
 
-class Detail_drinks(DetailView):
+class Detail_drinks(LoginRequiredMixin , DetailView):
     model = Drinks
     template_name = 'drink/detail_drinks.html'
     

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from coderstore.views import home_page, search_products, index
+from coderstore.views import all_products, home_page, search_products, index
 
 
 
@@ -29,4 +29,5 @@ urlpatterns = [
     path('search/',search_products, name='search-products'),
     path('inicio', home_page, name='inicio'),
     path('user/', include('users.urls')),
+    path('all/', all_products, name='all_products')
 ]

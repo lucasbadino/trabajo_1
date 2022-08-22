@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from users.forms import User_registracion_form
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
-
+from coderstore.views import Products,Drinks,Bakeries
 
 
 def login_request(request):
@@ -15,8 +15,14 @@ def login_request(request):
             user = authenticate(username = username, password = password)
             if user is not None:
                 login(request, user)
-                context = {'message': f'Bienvenido {username} a CoderStore!!!!'}
-                return render (request , 'index.html', context=context)
+                meat = Products.objects.all()
+                drink = Drinks .objects.all()
+                bakery= Bakeries.objects.all()
+                dic = meat.union(drink, bakery)
+                context = {	
+                    'all': dic
+                                    }
+            return render (request , 'all_products.html', context=context)
         form = AuthenticationForm()
         return render(request, 'user/login.html', {'error': 'Formulario invalido', 'form': form})
     elif request.method == 'GET':

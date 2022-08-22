@@ -5,6 +5,7 @@ from bakery.forms import Form_bakeries
 from django.templatetags.static import static
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 def bakeries(request):
     rand = randint(0, 2000)
     al1 = Bakeries.objects.create(name = 'Pan Frances', description = 'baguette', sku = rand, price = 50)
@@ -13,11 +14,9 @@ def bakeries(request):
     }
     return render(request, 'bakery/bakeries.html/', context=context)
 
-@login_required
+
 def list_bakeries(request):
-
     all = Bakeries.objects.all()
-
     context ={
         'list' : all
     }
@@ -40,32 +39,34 @@ def form_bakeries(request):
             'form': form
         }
     return render(request, 'bakery/create_bakeries.html/', context=context)
-
+@login_required
 def edit_bakeries(request, pk):
-    if request.method == 'POST':
-        form = Form_bakeries(request.POST)
-        if form.is_valid():
-            product = Bakeries.objects.get(id=pk)
-            product.name = form.cleaned_data['name']
-            product.price = form.cleaned_data['price']
-            product.description = form.cleaned_data['description']
-            product.stock = form.cleaned_data['stock']
-            product.save()
+        if request.method == 'POST':
+           
+                form = Form_bakeries(request.POST)
+                if form.is_valid():
+                    product = Bakeries.objects.get(id=pk)
+                    product.name = form.cleaned_data['name']
+                    product.price = form.cleaned_data['price']
+                    product.description = form.cleaned_data['description']
+                    product.stock = form.cleaned_data['stock']
+                    product.save()
 
-            return redirect(list_bakeries)
-
-    elif request.method == 'GET':
-        product = Bakeries.objects.get(id=pk)
-
-        form = Form_bakeries(initial={
-            'name': product.name,
-            'price': product.price,
-            'description': product.description,
-            'stock': product.stock})
-        context = {'form': form}
-        return render(request, 'bakery/edit_bakeries.html/', context=context)
-
-
+                    return redirect(list_bakeries)
+            
+        elif request.method == 'GET':
+            if request.user.is_superuser:
+                product = Bakeries.objects.get(id=pk)
+                form = Form_bakeries(initial={
+                    'name': product.name,
+                    'price': product.price,
+                    'description': product.description,
+                    'stock': product.stock})
+                context = {'form': form}
+                return render(request, 'bakery/edit_bakeries.html/', context=context)
+            else:
+                return redirect('login')
+@login_required
 def delete_bakeries(request, pk):
     if request.method == 'GET':
         product = Bakeries.objects.get(pk=pk)
@@ -76,6 +77,6 @@ def delete_bakeries(request, pk):
         product.delete()
         return redirect(list_bakeries)
 
-class Detail_bakeries(DetailView):
+class Detail_bakeries(LoginRequiredMixin, DetailView):
     model = Bakeries
     template_name = 'bakery/detail_bakeries.html'
