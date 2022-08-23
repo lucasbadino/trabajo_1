@@ -10,6 +10,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
+
+
 def drinks(request):
     rand = randint(0, 2000)
     al1 = Drinks.objects.create(name = 'Rutini', description = 'The mouthfeel combines ripe fruit with rich spices such as vanilla & chocolate imparted by oak. Great structure and smooth tannins, with a prolonged finish.', sku = rand, price = 2000, category = 'Malbec')
@@ -28,7 +30,8 @@ def list_drinks(request):
     }
     return render(request,'drink/drinks.html', context = context)
 
-def form_drinks(request):
+@login_required
+def create_drinks(request):
     if request.method == 'POST':
         form = Form_drinks(request.POST)
         if form.is_valid():
@@ -40,11 +43,15 @@ def form_drinks(request):
 							)
         return redirect(list_drinks)
     elif request.method == 'GET':
-        form = Form_drinks
-        context = {
-            'form': form
-        }
-    return render(request, 'drink/create_drinks.html', context=context)
+        if request.user.is_superuser:
+            form = Form_drinks
+            context = {
+                'form': form
+            }
+            return render(request, 'drink/create_drinks.html', context=context)
+        else:
+            return redirect("login")
+    
 
 @login_required
 def edit_drinks(request, pk):
@@ -61,22 +68,28 @@ def edit_drinks(request, pk):
             return redirect(list_drinks)
 
     elif request.method == 'GET':
-        product = Drinks.objects.get(id=pk)
+        if request.user.is_superuser:
+            product = Drinks.objects.get(id=pk)
 
-        form = Form_drinks(initial={
-            'name': product.name,
-            'price': product.price,
-            'description': product.description,
-            'stock': product.stock})
-        context = {'form': form}
-        return render(request, 'drink/edit_drinks.html', context=context)
+            form = Form_drinks(initial={
+                'name': product.name,
+                'price': product.price,
+                'description': product.description,
+                'stock': product.stock})
+            context = {'form': form}
+            return render(request, 'drink/edit_drinks.html', context=context)
+        else:
+            return redirect("login")
 
 @login_required
 def delete_drinks(request, pk):
     if request.method == 'GET':
-        product = Drinks.objects.get(pk=pk)
-        context = {'product': product}
-        return render(request, 'drink/delete_drinks.html', context=context)
+        if request.user.is_superuser:
+            product = Drinks.objects.get(pk=pk)
+            context = {'product': product}
+            return render(request, 'drink/delete_drinks.html', context=context)
+        else:
+            return redirect("login")
     elif request.method == 'POST':
         product = Drinks.objects.get(pk=pk)
         product.delete()

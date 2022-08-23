@@ -1,8 +1,10 @@
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from users.forms import User_registracion_form
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from coderstore.views import Products,Drinks,Bakeries
+from users.models import *
 
 
 def login_request(request):
@@ -49,5 +51,12 @@ def register_request(request):
         }
         return render(request, 'user/register.html', context= context)
 
+# def user_profile(request):
+#     if request.user.is_authenticated:
+#         profile = User_profile()
+#         context = {
+#             'profile': profile
+#         }
+#         return render(request, 'user/user_profile.html', context= context)
 
 

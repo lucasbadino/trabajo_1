@@ -22,7 +22,7 @@ def list_bakeries(request):
     }
     return render(request,'bakery/bakeries.html/', context = context)
 
-def form_bakeries(request):
+def create_bakeries(request):
     if request.method == 'POST':
         form = Form_bakeries(request.POST)
         if form.is_valid():
@@ -34,11 +34,14 @@ def form_bakeries(request):
 							)
         return redirect(list_bakeries)
     elif request.method == 'GET':
-        form = Form_bakeries
-        context = {
-            'form': form
-        }
-    return render(request, 'bakery/create_bakeries.html/', context=context)
+        if request.user.is_superuser:
+            form = Form_bakeries
+            context = {
+                'form': form
+            }
+            return render(request, 'bakery/create_bakeries.html/', context=context)
+        else:
+            return redirect('login')
 @login_required
 def edit_bakeries(request, pk):
         if request.method == 'POST':
@@ -69,9 +72,12 @@ def edit_bakeries(request, pk):
 @login_required
 def delete_bakeries(request, pk):
     if request.method == 'GET':
-        product = Bakeries.objects.get(pk=pk)
-        context = {'product': product}
-        return render(request, 'bakery/delete_bakeries.html', context=context)
+        if request.user.is_superuser:
+            product = Bakeries.objects.get(pk=pk)
+            context = {'product': product}
+            return render(request, 'bakery/delete_bakeries.html', context=context)
+        else:
+            return redirect('login')
     elif request.method == 'POST':
         product = Bakeries.objects.get(pk=pk)
         product.delete()

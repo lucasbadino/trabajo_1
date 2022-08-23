@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{%block title%}
+User Profile
+{%endblock%}
+
+{%block text%}
+
+
+<div class="container" style="align-items:center ; max-width:500px ;">
+    <form action="" method='POST'>
+        {% csrf_token %}
+        <table>
+            <div class="card-body" style="margin-bottom:20%;">
+                <div class="clearfix mb-3"> <span>
+                        <h1>{{user}}</h1>
+                    </span> <span class="float-end price-hp">
+                        <br>&dollar;{{email}}</span> </div>
+                <h5 class="card-title">{{address}}</h5>
+                <h5 class="card-title">stock: {{phone}}</h5>
+                <h5 class="card-title">sku: {{image}}</h5>
+        </table>
+    </form>
+</div>
+{% endblock %}

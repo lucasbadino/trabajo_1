@@ -47,6 +47,7 @@
             <li><a class="dropdown-item" href="/bakery/bakeries/">Panaderia</a></li>
           </ul>
         </li>
+        {% if request.user.is_authenticated and request.user.is_superuser %}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
             Creacion
@@ -63,9 +64,9 @@
             <li><a class="dropdown-item" href="/bakery/create-bakeries/">Panaderia</a></li>
           </ul>
         </li>
+        {%endif%}
 
         <li class="nav-item"><a class="nav-link" href="#" style="margin-right: 34rem">Contacto</a></li>
-
 
         {% if request.user.is_authenticated %}
 

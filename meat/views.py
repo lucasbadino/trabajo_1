@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
+
+
 def meats(request):
     rand = randint(0, 2000)
     al1 = Products.objects.create(name = 'Carne', description = 'Carne de ternera', sku = rand, price = 2000)
@@ -26,7 +28,9 @@ def list_of_meats(request):
     }
     return render(request,'meat/meats.html', context = context)
 
-def form_meats(request):
+
+@login_required
+def create_meats(request):
     if request.method == 'POST':
         form = Form_meats(request.POST)
         if form.is_valid():
@@ -38,10 +42,13 @@ def form_meats(request):
 							)
         return redirect(list_of_meats)
     elif request.method == 'GET':
-        form = Form_meats
-        context = {
-            'form': form
-        }
+        if request.user.is_superuser:
+            form = Form_meats
+            context = {
+                'form': form
+            }
+        else:
+            return redirect("login")
     return render(request, 'meat/create_meats.html', context=context)
 
 @login_required
@@ -59,24 +66,32 @@ def edit_meats(request, pk):
             return redirect(list_of_meats)
 
     elif request.method == 'GET':
-        product = Products.objects.get(id=pk)
+        if request.user.is_superuser:
+            product = Products.objects.get(id=pk)
 
-        form = Form_meats (initial={
-            'name': product.name,
-            'price': product.price,
-            'description': product.description,
-            'stock': product.stock})
-        context = {'form': form}
-        return render(request, 'meat/edit_meats.html', context=context)
+            form = Form_meats (initial={
+                'name': product.name,
+                'price': product.price,
+                'description': product.description,
+                'stock': product.stock})
+            context = {'form': form}
+            return render(request, 'meat/edit_meats.html', context=context)
+        else:
+            return redirect("login")
+    
+
 
 
 
 @login_required
 def delete_meats(request, pk):
     if request.method == 'GET':
-        product = Products.objects.get(pk=pk)
-        context = {'product': product}
-        return render(request, 'meat/delete_meats.html', context=context)
+        if request.user.is_superuser:
+            product = Products.objects.get(pk=pk)
+            context = {'product': product}
+            return render(request, 'meat/delete_meats.html', context=context)
+        else:
+            return redirect("login")
     elif request.method == 'POST':
         product = Products.objects.get(pk=pk)
         product.delete()
