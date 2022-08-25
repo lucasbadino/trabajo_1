@@ -27,7 +27,7 @@ urlpatterns = [
     path('drink/', include('drink.urls')),
     path('bakery/', include('bakery.urls')),
     path('search/',search_products, name='search-products'),
-    path('inicio', home_page, name='inicio'),
+    path('inicio/', home_page, name='inicio'),
     path('user/', include('users.urls')),
     path('all/', all_products, name='all_products')
 ]

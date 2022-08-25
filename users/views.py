@@ -44,8 +44,7 @@ def register_request(request):
             form = User_registracion_form
             context ['form'] = form
             return render(request, 'user/register.html', context=context)
-
-    
+  
     elif request.method == 'GET':
         form = User_registracion_form()
         context = {
@@ -66,12 +65,13 @@ def user_profile(request, pk):
             profile.email = form.cleaned_data['email']
             profile2.address = form.cleaned_data['address']
             profile2.phone = form.cleaned_data['phone']
-            profile.password = form.cleaned_data['password']
+            profile.password1 = form.cleaned_data['password1']
+            profile.password2= form.cleaned_data['password2']
             profile2.image =form.cleaned_data['image']
             profile2.save()
             profile.save()
 
-            return redirect('login')
+            return redirect('confirmation')
 
     elif request.method == 'GET':
         if request.user.is_authenticated:
@@ -86,11 +86,13 @@ def user_profile(request, pk):
                 'address':profile2.address,
                 'phone': profile2.phone,
                 'password': profile.password,
+                'password': profile.password,
                 'image':profile2.image })
             context = {'form': form}
             return render(request, 'user/user_profile.html', context=context)
         else:
-            return redirect('login')
+            return redirect('confirmation')
 
-
+def confirmation(request):  
+    return render(request, 'user/confirmation.html',context={})
 

@@ -11,7 +11,13 @@
     {% endblock %}
 
     {%block text%}
-{% if message %}
-<h1>{{message}}</h1>
-{% endif %}
+
+<h1>Sus cambios han sido realizados con exito</h1>
+
+
+<div> <a href="/inicio/" class="btn btn-success"> <button type="submit" class="btn btn-primary "> Volver a Inicio</button>
+</a>
+</div>
+
+<p style="color: red;">{{errors}}</p>
     {% endblock %}
