@@ -15,9 +15,18 @@ Panaderia
 
 
             <div class="col" style= "margin-top:-5%; margin:2%">
-                <div class="card h-100 shadow-sm"> <img
-                        src='https://images-ext-2.discordapp.net/external/svfncM6zVx01MCKTJHBgx4QzJf2iQZXELGg2z5Ia3D8/https/cdn.vox-cdn.com/thumbor/O3EfkTeAegDUb2a1WOdqRa8NJIE%3D/0x0%3A2000x1338/1200x900/filters%3Afocal%28840x509%3A1160x829%29/cdn.vox-cdn.com/uploads/chorus_image/image/64752130/564035741.jpg.0.jpg?width=630&height=473' class="card-img-top"
-                        alt="...">
+                <div class="card h-100 shadow-sm"> 
+                    
+                    {% if i.image %} 
+                    <img
+                        src='{{i.image.url}}'
+                        class="card-img-top" alt="" >
+                    {% else %}
+                        <img
+                        src='https://media.discordapp.net/attachments/1004393238276362365/1005986351855964250/coderhouse-logo.png'
+                        class="card-img-top" alt="" >
+                    {% endif %}
+                    
                     <div class="card-body">
                         <div class="clearfix mb-3"> <span>
                                 <h1>{{i.name}}</h1>

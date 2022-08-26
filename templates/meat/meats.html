@@ -14,9 +14,18 @@ Alimentos
 {% for i in list %}
             
             <div class="col" style= "margin-top:-5%; margin:2%">
-                <div class="card h-100 shadow-sm" > <img
-                        src='https://definicion.de/wp-content/uploads/2011/02/carne-1.jpg'
-                        class="card-img-top" alt="...">
+                <div class="card h-100 shadow-sm" > 
+                    
+                    {% if i.image %} 
+                    <img
+                        src='{{i.image.url}}'
+                        class="card-img-top" alt="" >
+                    {% else %}
+                        <img
+                        src='https://media.discordapp.net/attachments/1004393238276362365/1005986351855964250/coderhouse-logo.png'
+                        class="card-img-top" alt="" >
+                    {% endif %}
+                    
                     <div class="card-body">
                         <div class="clearfix mb-3"> <span>
                                 <h1>{{i.name}}</h1>

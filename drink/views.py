@@ -30,7 +30,7 @@ def list_drinks(request):
 @login_required
 def create_drinks(request):
     if request.method == 'POST':
-        form = Form_drinks(request.POST)
+        form = Form_drinks(request.POST, request.FILES)
         if form.is_valid():
             Drinks.objects.create (
 			     name = form.cleaned_data['name'],

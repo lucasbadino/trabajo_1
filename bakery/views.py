@@ -26,7 +26,7 @@ def list_bakeries(request):
 
 def create_bakeries(request):
     if request.method == 'POST':
-        form = Form_bakeries(request.POST)
+        form = Form_bakeries(request.POST, request.FILES)
         if form.is_valid():
             Bakeries.objects.create (
 			     name = form.cleaned_data['name'],
@@ -49,17 +49,17 @@ def create_bakeries(request):
 def edit_bakeries(request, pk):
         if request.method == 'POST':
            
-                form = Form_bakeries(request.POST)
-                if form.is_valid():
-                    product = Bakeries.objects.get(id=pk)
-                    product.name = form.cleaned_data['name']
-                    product.price = form.cleaned_data['price']
-                    product.description = form.cleaned_data['description']
-                    product.stock = form.cleaned_data['stock']
-                    product.image = form.cleaned_data['image']
-                    product.save()
+            form = Form_bakeries(request.POST, request.FILES)
+            if form.is_valid():
+                product = Bakeries.objects.get(id=pk)
+                product.name = form.cleaned_data['name']
+                product.price = form.cleaned_data['price']
+                product.description = form.cleaned_data['description']
+                product.stock = form.cleaned_data['stock']
+                product.image = form.cleaned_data['image']
+                product.save()
 
-                    return redirect(list_bakeries)
+                return redirect(list_bakeries)
             
         elif request.method == 'GET':
             if request.user.is_superuser:

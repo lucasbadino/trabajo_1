@@ -32,7 +32,7 @@ def list_of_meats(request):
 @login_required
 def create_meats(request):
     if request.method == 'POST':
-        form = Form_meats(request.POST)
+        form = Form_meats(request.POST, request.FILES)
         if form.is_valid():
             Products.objects.create (
 			     name = form.cleaned_data['name'],
