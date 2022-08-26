@@ -10,6 +10,7 @@ class Bakeries(models.Model):
     price = models.FloatField()
     stock = models.IntegerField(default= 0)
     image = models.ImageField(upload_to= 'products_image_bakeries', blank=True)
+    unic = models.CharField(max_length=1, default='b')
        
     def __str__(self):
         return self.name

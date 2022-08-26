@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {%block title%}
 Editor de Panes
 {%endblock%}
@@ -10,12 +10,12 @@ Editor de Panes
 
 <form action="" method='POST' enctype="multipart/form-data" style="margin-left: 35% ; margin-top: 7%; margin-bottom: 10%; ">
     {% csrf_token %}
-    <table>
-        {{form.as_table}}
 
-    </table>
+    {{form | crispy}}
 
     <button type="submit" class="btn btn-primary">Enviar</button>
+    <input type="button" value="Volver"  onclick="history.back()">
+    
 </form>
 
 {% endblock %}
