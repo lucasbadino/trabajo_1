@@ -1,0 +1,60 @@
+
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+    {% block link %}
+      <link type="text/css" href="{% static '/css/style.css' %}" rel="stylesheet" />
+    {%endblock%}
+
+
+    {% block title %}
+        Busqueda Producto
+    {% endblock %}
+
+    {%block text%}  
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+        <a class="dropdown-item" href="#">Carnes</a>
+        <a class="dropdown-item" href="#">Bebidas</a>
+        <a class="dropdown-item" href="#">Panificacion</a>
+      </div>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Sku</th>
+          </tr>
+        </thead>      
+    {% for i in all %} 
+ 
+    
+        <tbody>
+          <tr>
+            <th scope="row">{{i.id}}</th>
+            <td>{{i.name}}</td>
+            <td>{{i.stock}}</td>
+            <td>${{i.price}}</td>
+            <td>{{i.sku}}</td>
+            {%if i.unic == 'd'%}
+            <td><a class="btn btn-warning" href="/../drink/edit-drinks/{{i.id}}/" role="button">Editar</a></td>
+            <td><a class="btn btn-danger" href="/../drink/delete-drinks/{{i.id}}/" role="button">Borrar</a></td>
+            {%elif i.unic == 'm'%}
+            <td><a class="btn btn-warning" href="/../meat/edit-meats/{{i.id}}/" role="button">Editar</a></td>
+            <td><a class="btn btn-danger" href="/../meat/delete-meats/{{i.id}}/" role="button">Borrar</a></td>
+            {%elif i.unic == 'b'%}
+            <td><a class="btn btn-warning" href="/../bakery/edit-bakeries/{{i.id}}/" role="button">Editar</a></td>
+            <td><a class="btn btn-danger" href="/../bakery/delete-bakeries/{{i.id}}/" role="button">Borrar</a></td>
+            {%endif%}
+          </tr>
+          
+        </tbody>
+      
+
+    {% endfor %}
+</table>
+
+    {% endblock %}

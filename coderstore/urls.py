@@ -29,5 +29,6 @@ urlpatterns = [
     path('search/',search_products, name='search-products'),
     path('inicio/', home_page, name='inicio'),
     path('user/', include('users.urls')),
-    path('all/', all_products, name='all_products')
+    path('all/', all_products, name='all_products'),
+    path('stock/', include('stock.urls')),
 ]
