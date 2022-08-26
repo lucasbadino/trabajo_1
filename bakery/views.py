@@ -6,6 +6,8 @@ from django.templatetags.static import static
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+# this function was made to create the first products.
 def bakeries(request):
     rand = randint(0, 2000)
     al1 = Bakeries.objects.create(name = 'Pan Frances', description = 'baguette', sku = rand, price = 50)
@@ -30,7 +32,8 @@ def create_bakeries(request):
 			     name = form.cleaned_data['name'],
 			     price = form.cleaned_data['price' ],
                  description = form.cleaned_data['description'],
-                 stock = form.cleaned_data['stock']
+                 stock = form.cleaned_data['stock'],
+                 image = form.cleaned_data['image']
 							)
         return redirect(list_bakeries)
     elif request.method == 'GET':
@@ -53,6 +56,7 @@ def edit_bakeries(request, pk):
                     product.price = form.cleaned_data['price']
                     product.description = form.cleaned_data['description']
                     product.stock = form.cleaned_data['stock']
+                    product.image = form.cleaned_data['image']
                     product.save()
 
                     return redirect(list_bakeries)
@@ -64,7 +68,8 @@ def edit_bakeries(request, pk):
                     'name': product.name,
                     'price': product.price,
                     'description': product.description,
-                    'stock': product.stock})
+                    'stock': product.stock,
+                    'image': product.image,})
                 context = {'form': form}
                 return render(request, 'bakery/edit_bakeries.html/', context=context)
             else:

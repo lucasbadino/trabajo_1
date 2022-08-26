@@ -5,4 +5,5 @@ class Form_meats(forms.Form):
     description = forms.CharField(max_length=200)
     stock = forms.IntegerField()
     price = forms.FloatField()
+    image = forms.ImageField(required=False)
     

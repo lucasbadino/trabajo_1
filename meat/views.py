@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
-
+# this function was made to create the first products.
 def meats(request):
     rand = randint(0, 2000)
     al1 = Products.objects.create(name = 'Carne', description = 'Carne de ternera', sku = rand, price = 2000)
@@ -38,7 +38,8 @@ def create_meats(request):
 			     name = form.cleaned_data['name'],
 			     price = form.cleaned_data['price' ],
                  description = form.cleaned_data['description'],
-                 stock = form.cleaned_data['stock']
+                 stock = form.cleaned_data['stock'],
+                 image = form.cleaned_data['image'],
 							)
         return redirect(list_of_meats)
     elif request.method == 'GET':
@@ -54,13 +55,14 @@ def create_meats(request):
 @login_required
 def edit_meats(request, pk):
     if request.method == 'POST':
-        form = Form_meats(request.POST)
+        form = Form_meats(request.POST, request.FILES)
         if form.is_valid():
             product = Products.objects.get(id=pk)
             product.name = form.cleaned_data['name']
             product.price = form.cleaned_data['price']
             product.description = form.cleaned_data['description']
             product.stock = form.cleaned_data['stock']
+            product.image = form.cleaned_data['image']
             product.save()
 
             return redirect(list_of_meats)
@@ -73,7 +75,9 @@ def edit_meats(request, pk):
                 'name': product.name,
                 'price': product.price,
                 'description': product.description,
-                'stock': product.stock})
+                'stock': product.stock,
+                'image': product.image,
+                })
             context = {'form': form}
             return render(request, 'meat/edit_meats.html', context=context)
         else:

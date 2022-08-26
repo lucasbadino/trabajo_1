@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title%}
 
@@ -20,6 +21,8 @@ Details
                         class="card-img-top" alt="" >
                     <div class="card-body">
                         <div class="clearfix mb-3"> <span>
+                                    {{ object.image }}
+                        
                                 <h1>{{object.name}}</h1>
                             </span> <span class="float-end price-hp">
                                 <br>&dollar;{{object.price}}</span> </div>

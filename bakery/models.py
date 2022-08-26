@@ -9,7 +9,7 @@ class Bakeries(models.Model):
     sku = models.IntegerField(default= rand)
     price = models.FloatField()
     stock = models.IntegerField(default= 0)
-
+    image = models.ImageField(upload_to= 'products_image_bakeries', blank=True)
        
     def __str__(self):
         return self.name
