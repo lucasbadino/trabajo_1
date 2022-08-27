@@ -110,8 +110,32 @@
               <h5 class="card-title">{{i.description}}</h5>
               <h5 class="card-title">stock: {{i.stock}}</h5>
               <h5 class="card-title">sku: {{i.sku}}</h5>
-              <div class="text-center my-4"> <a href="#" class="btn btn-warning"
-                  style="position:absolute; left:35%; bottom:1%;">Comprar</a> </div>
+              <a href="#" class="btn btn-primary btn-md success" role="button" aria-pressed="true">Comprar</a>
+              
+              {% if request.user.is_superuser and i.unic == 'd' %}
+              <a href="/../drink/edit-drinks/{{i.id}}/" class="btn btn-info btn-md active" role="button" aria-pressed="true">Editar</a>
+              <a href="/../drink/delete-drinks/{{i.id}}/" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Eliminar</a>
+              <a href="/drink/detail-drinks/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
+              {% elif request.user.is_superuser and i.unic == 'm' %}
+              
+              <a href="/../meat/edit-meats/{{i.id}}/" class="btn btn-info btn-md active" role="button" aria-pressed="true">Editar</a>
+              <a href="/../meat/delete-meats/{{i.id}}/" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Eliminar</a>
+              <a href="/../meat/detail-meats/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
+              {% elif request.user.is_superuser and i.unic == 'b' %}
+                         
+              <a href="/../bakery/edit-bakeries/{{i.id}}/" class="btn btn-info btn-md active" role="button" aria-pressed="true">Editar</a>
+              <a href="/../bakery/delete-bakeries/{{i.id}}/" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Eliminar</a>
+              <a href="/../bakery/detail-bakeries/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
+              {% elif not request.user.is_superuser and i.unic == 'd' %}
+              <a href="/drink/detail-drinks/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
+              {% elif not request.user.is_superuser and i.unic == 'm' %}
+              <a href="/../meat/detail-meats/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
+              
+              {% elif not request.user.is_superuser and i.unic == 'b' %}
+              <a href="/../bakery/detail-bakeries/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
+              
+              {% endif %}
+              
             </div>
           </div>
         </div>

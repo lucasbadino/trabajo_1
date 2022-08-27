@@ -10,5 +10,5 @@ urlpatterns = [
     path('create-drinks/', create_drinks, name='create-drinks'),
     path('edit-drinks/<int:pk>/', edit_drinks, name='edit-drinks'),
     path('delete-drinks/<int:pk>/', delete_drinks, name='delete-drinks'),
-    path('detail-drinks/<int:pk>', Detail_drinks.as_view(), name='detail-dricks'),
+    path('detail-drinks/<int:pk>/', Detail_drinks.as_view(), name='detail-dricks'),
 ]
