@@ -1,3 +1,4 @@
+
 from multiprocessing import context
 from django.shortcuts import render, redirect
 from users.forms import Form_profile
@@ -56,7 +57,7 @@ def user_profile(request, pk):
 
     if request.method == 'POST':
        
-        form = Form_profile(request.POST)
+        form = Form_profile(request.POST , request.FILES)
         if form.is_valid():
             profile = User.objects.get(id=pk)
             profile2 = User_profile.objects.get()
@@ -96,3 +97,12 @@ def user_profile(request, pk):
 def confirmation(request):  
     return render(request, 'user/confirmation.html',context={})
 
+
+def profile_complete(request, pk ):
+    profile2 = User.objects.get(id = pk)
+    profile = User_profile.objects.get()
+
+    context = {
+        'profile': profile
+    }
+    return render(request, 'user/profile_complete.html' , context=context)

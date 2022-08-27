@@ -1,0 +1,54 @@
+
+{% extends 'base.html' %}
+{% load static %}
+    {% block link %}
+      <link type="text/css" href="{% static '/css/style.css' %}" rel="stylesheet" />
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    {%endblock%}
+    {%block text%}
+<div class="container bootstrap snippets bootdey">
+<div class="row">
+  <div class="profile-nav col-md-3">
+      <div class="panel">
+          <div class="user-heading round">
+              <a href="#">
+                  <img src="{{profile.image.url}}" alt="">
+              </a>
+              <h1>{{request.user.first_name}} <br> {{request.user.last_name}}</h1>
+              <h6>{{profile.email}}</h6>
+          </div>
+
+          <ul class="nav nav-pills nav-stacked">
+              <li><a href="/../user/user-profile/{{request.user.id}}/"> <i class="fa fa-edit"></i> Editar perfil</a></li>
+          </ul>
+      </div>
+  </div>
+  <div class="profile-info col-md-9">
+      <div class="panel">
+          
+          <div class="panel-body bio-graph-info">
+              <h1>Perfil</h1>
+              <div class="row">
+                  <div class="bio-row">
+                      <p><span>Nombre </span>: {{request.user.first_name | upper}}</p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span>Apellido </span>: {{request.user.last_name | upper}}</p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span>Direccion</span>: {{profile.address | upper}}</p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span>Email </span>: {{profile.email | upper}}</p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span>Telefono </span>:{{profile.phone | upper}}</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+  </div>
+</div>
+</div>
+{%endblock%}
