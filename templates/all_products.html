@@ -22,25 +22,39 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">CoderStore</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll"
-      aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-md navbar-light bg-faded">
+    <a href="/" class="navbar-brand">CoderStore</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar5">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;margin-right: 0%;">
-        <li class="nav-item"><a class="nav-link" href="/meat/meats/" >Carnes</a></li>
+        <li class="nav-item"><a class="nav-link" href="/meat/meats/">Carnes</a></li>
         <li class="nav-item"><a class="nav-link" href="/drink/drinks/"> Bebidas</a></li>
-        <li class="nav-item"><a class="nav-link" href="/bakery/bakeries/" style="margin:0rem 30rem 0rem 0rem" >Panderia</a></li>
+        <li class="nav-item"><a class="nav-link" href="/bakery/bakeries/">Panderia</a></li>
+      </ul>
+      <form class="mx-2 my-auto d-inline w-100" action="/search/" method="GET">
+        <div class="input-group">
+          <input type="text" class="form-control border border-right-0 mr-auto my-2 my-lg-0 s"
+            placeholder="&#128269Search..." viewBox="0 0 16 16" aria-label="Search" name="search">
+          <span class="input-group-append">
+            <button class="btn btn-outline-light border border-left-0" type="button">
+              <i class="fa fa-search"></i>
+            </button>
+          </span>
+        </div>
+      </form>
 
-        {% if request.user.is_authenticated %}
 
+      {% if request.user.is_authenticated %}
+      <div id="container">
+        <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false" style="margin-left:180% " >
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
               Perfil
             </a>
-            <ul class="dropdown-menu" >
+            <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/user/user-profile/{{user.id}}/">Mas info</a></li>
               <li>
                 <hr class="dropdown-divider">
@@ -50,22 +64,22 @@
                 <hr class="dropdown-divider">
               </li>
           </li>
-          {% else %}
+        </ul>
+        {% else %}
+        <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll">
           <li class="nav-item"> <a class="nav-link" href="/user/login/">Login</a></li>
           <li class="nav-item"><a class="nav-link" href="/user/register/">Singup</a></li>
 
 
-          {%endif%}
-        </div>
-        </ul>
+        </ul>{%endif%}
+      </div>
       </ul>
-      <form class="d-flex" action="/search/" method="GET" >
-        <input class="form-control mr-2" type="search" placeholder="Buscar" aria-label="Search" name="search">
-        <button class="btn btn-outline-success" type="search">Buscar</button>
-
-      </form>
-
+      </ul>
     </div>
+
+
+
+
   </nav>
   <div class="cater3-movingBG">
     <div class="flyinTxtCont">
@@ -74,165 +88,168 @@
     </div>
   </div>
 
-    <main>
-        <div class="container-fluid bg-trasparent my-4 p-3" >
-            <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+  <main>
+    <div class="container-fluid bg-trasparent my-4 p-3">
+      <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
 
-    {% for i in all %} 
-    <div class="col" style= "margin:2%">
-        <div class="card h-100 shadow-sm">
-                    {% if i.image %} 
-                    <img src='{{i.image.url}}' class="card-img-top" alt="" >
-                    {% else %}
-                        <img src='https://media.discordapp.net/attachments/1004393238276362365/1005986351855964250/coderhouse-logo.png' class="card-img-top" alt="" >
-                    {% endif %}
-            <div class="card-body" style= "margin-bottom:20%;">
-                <div class="clearfix mb-3"> <span>
-                        <h1>{{i.name}}</h1>
-                    </span> <span class="float-end price-hp">
-                        <br>&dollar;{{i.price}}</span> </div>
-                        <h5 class="card-title">{{i.description}}</h5>
-                <h5 class="card-title">stock: {{i.stock}}</h5>
-                <h5 class="card-title">sku: {{i.sku}}</h5>      
-                <div class="text-center my-4" > <a href="#" class="btn btn-warning" style="position:absolute; left:35%; bottom:1%;">Comprar</a> </div>
+        {% for i in all %}
+        <div class="col" style="margin:2%">
+          <div class="card h-100 shadow-sm">
+            {% if i.image %}
+            <img src='{{i.image.url}}' class="card-img-top" alt="">
+            {% else %}
+            <img
+              src='https://media.discordapp.net/attachments/1004393238276362365/1005986351855964250/coderhouse-logo.png'
+              class="card-img-top" alt="">
+            {% endif %}
+            <div class="card-body" style="margin-bottom:20%;">
+              <div class="clearfix mb-3"> <span>
+                  <h1>{{i.name}}</h1>
+                </span> <span class="float-end price-hp">
+                  <br>&dollar;{{i.price}}</span> </div>
+              <h5 class="card-title">{{i.description}}</h5>
+              <h5 class="card-title">stock: {{i.stock}}</h5>
+              <h5 class="card-title">sku: {{i.sku}}</h5>
+              <div class="text-center my-4"> <a href="#" class="btn btn-warning"
+                  style="position:absolute; left:35%; bottom:1%;">Comprar</a> </div>
             </div>
-        </div>
-        </div>
-
-
-
-    {% endfor %}
-
-
-  
-
-</div>
-
-<!-- Footer -->
-<footer class="text-center text-lg-start bg-light text-muted">
-    <!-- Section: Social media -->
-    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-      <!-- Left -->
-      <div class="me-5 d-none d-lg-block">
-        <span>Get connected with us on social networks:</span>
-      </div>
-      <!-- Left -->
-  
-      <!-- Right -->
-      <div>
-        <a href="" class="me-4 text-reset">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="" class="me-4 text-reset">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="" class="me-4 text-reset">
-          <i class="fab fa-google"></i>
-        </a>
-        <a href="" class="me-4 text-reset">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="" class="me-4 text-reset">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="" class="me-4 text-reset">
-          <i class="fab fa-github"></i>
-        </a>
-      </div>
-      <!-- Right -->
-    </section>
-    <!-- Section: Social media -->
-  
-    <!-- Section: Links  -->
-    <section class="">
-      <div class="container text-center text-md-start mt-5">
-        <!-- Grid row -->
-        <div class="row mt-3">
-          <!-- Grid column -->
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-            <!-- Content -->
-            <h6 class="text-uppercase fw-bold mb-4">
-              <i class="fas fa-gem me-3"></i>Company name
-            </h6>
-            <p>
-              Here you can use rows and columns to organize your footer content. Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit.
-            </p>
           </div>
-          <!-- Grid column -->
-  
-          <!-- Grid column -->
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">
-              Products
-            </h6>
-            <p>
-              <a href="#!" class="text-reset">Angular</a>
-            </p>
-            <p>
-              <a href="#!" class="text-reset">React</a>
-            </p>
-            <p>
-              <a href="#!" class="text-reset">Vue</a>
-            </p>
-            <p>
-              <a href="#!" class="text-reset">Laravel</a>
-            </p>
-          </div>
-          <!-- Grid column -->
-  
-          <!-- Grid column -->
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">
-              Useful links
-            </h6>
-            <p>
-              <a href="#!" class="text-reset">Pricing</a>
-            </p>
-            <p>
-              <a href="#!" class="text-reset">Settings</a>
-            </p>
-            <p>
-              <a href="#!" class="text-reset">Orders</a>
-            </p>
-            <p>
-              <a href="#!" class="text-reset">Help</a>
-            </p>
-          </div>
-          <!-- Grid column -->
-  
-          <!-- Grid column -->
-          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-            
-            <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
-            <p>
-              <i class="fas fa-envelope me-3"></i>
-              info@example.com
-            </p>
-            <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-            <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
-          <a href="#!" class="text-reset">Contactenos</a>
         </div>
-          <!-- Grid column -->
-        </div>
-        <!-- Grid row -->
+
+
+
+        {% endfor %}
+
+
+
+
       </div>
-    </section>
-    <!-- Section: Links  -->
-  
-    <!-- Copyright -->
-    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-      © 2022 Copyright:
-      <a class="text-reset fw-bold" href="/../">CoderStore</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
-  <!-- Footer -->
-  
+
+      <!-- Footer -->
+      <footer class="text-center text-lg-start bg-light text-muted">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+          <!-- Left -->
+          <div class="me-5 d-none d-lg-block">
+            <span>Get connected with us on social networks:</span>
+          </div>
+          <!-- Left -->
+
+          <!-- Right -->
+          <div>
+            <a href="" class="me-4 text-reset">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+              <i class="fab fa-google"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+          <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="">
+          <div class="container text-center text-md-start mt-5">
+            <!-- Grid row -->
+            <div class="row mt-3">
+              <!-- Grid column -->
+              <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                <!-- Content -->
+                <h6 class="text-uppercase fw-bold mb-4">
+                  <i class="fas fa-gem me-3"></i>Company name
+                </h6>
+                <p>
+                  Here you can use rows and columns to organize your footer content. Lorem ipsum
+                  dolor sit amet, consectetur adipisicing elit.
+                </p>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                <!-- Links -->
+                <h6 class="text-uppercase fw-bold mb-4">
+                  Products
+                </h6>
+                <p>
+                  <a href="#!" class="text-reset">Angular</a>
+                </p>
+                <p>
+                  <a href="#!" class="text-reset">React</a>
+                </p>
+                <p>
+                  <a href="#!" class="text-reset">Vue</a>
+                </p>
+                <p>
+                  <a href="#!" class="text-reset">Laravel</a>
+                </p>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                <!-- Links -->
+                <h6 class="text-uppercase fw-bold mb-4">
+                  Useful links
+                </h6>
+                <p>
+                  <a href="#!" class="text-reset">Pricing</a>
+                </p>
+                <p>
+                  <a href="#!" class="text-reset">Settings</a>
+                </p>
+                <p>
+                  <a href="#!" class="text-reset">Orders</a>
+                </p>
+                <p>
+                  <a href="#!" class="text-reset">Help</a>
+                </p>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                <!-- Links -->
+                <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+
+                <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+                <p>
+                  <i class="fas fa-envelope me-3"></i>
+                  info@example.com
+                </p>
+                <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+                <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                <a href="#!" class="text-reset">Contactenos</a>
+              </div>
+              <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+          </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+          © 2022 Copyright:
+          <a class="text-reset fw-bold" href="/../">CoderStore</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+      <!-- Footer -->
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
   integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
