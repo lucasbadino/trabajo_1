@@ -5,8 +5,8 @@
 }
 
 body {
-    background:#000;
-  }
+    background-image: url('https://img.freepik.com/free-vector/smooth-white-wave-background_52683-55288.jpg?w=2000') 
+}
   .cater3-movingBG {
       height: 100%;
       background-image: url(http://salsaritas.johngroupinteractive.com/wp-content/uploads/2017/06/enchilada-bg.jpg);
@@ -75,7 +75,6 @@ body {
       background-color:rgba(255,255,255,0.9);
       display:inline-block;
       color:#000;
-      box-size:border-box;
       max-width:63%;
       max-width: 22em;
       font-size: 32px;
