@@ -33,11 +33,11 @@ def create_drinks(request):
         form = Form_drinks(request.POST, request.FILES)
         if form.is_valid():
             Drinks.objects.create (
-			     name = form.cleaned_data['name'],
-			     price = form.cleaned_data['price' ],
-                 description = form.cleaned_data['description'],
+			     name = form.cleaned_data['nombre'],
+			     price = form.cleaned_data['precio' ],
+                 description = form.cleaned_data['descripcion'],
                  stock = form.cleaned_data['stock'],
-                 image = form.cleaned_data['image'],
+                 image = form.cleaned_data['imagen'],
 							)
         return redirect(list_drinks)
     elif request.method == 'GET':
@@ -57,11 +57,11 @@ def edit_drinks(request, pk):
         form = Form_drinks(request.POST, request.FILES)
         if form.is_valid():
             product = Drinks.objects.get(id=pk)
-            product.name = form.cleaned_data['name']
-            product.price = form.cleaned_data['price']
-            product.description = form.cleaned_data['description']
+            product.name = form.cleaned_data['nombre']
+            product.price = form.cleaned_data['precio']
+            product.description = form.cleaned_data['descripcion']
             product.stock = form.cleaned_data['stock']
-            product.image = form.cleaned_data['image']
+            product.image = form.cleaned_data['imagen']
             product.save()
 
             return redirect(list_drinks)
@@ -71,11 +71,11 @@ def edit_drinks(request, pk):
             product = Drinks.objects.get(id=pk)
 
             form = Form_drinks(initial={
-                'name': product.name,
-                'price': product.price,
-                'description': product.description,
+                'nombre': product.name,
+                'precio': product.price,
+                'descripcion': product.description,
                 'stock': product.stock,
-                'image': product.image})
+                'imagen': product.image})
             context = {'form': form}
             return render(request, 'drink/edit_drinks.html', context=context)
         else:

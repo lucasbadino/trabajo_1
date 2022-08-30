@@ -17,16 +17,17 @@ Details
 
             <div class="col" style= 'margin: auto;'>
                 <div class="card h-100 shadow-sm"> <img
-                        src='https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQOQBrwOgfmr8sCNET4DKpFvclRKknud5k1RbLFLCSmVImln4BLqEzVOiGVVubXdfN3gBqmrxdtHA&usqp=CAc'
+                        src='{{ object.image.url }}'
                         class="card-img-top" alt="" >
                     <div class="card-body">
                         <div class="clearfix mb-3"> <span>
-                                    {{ object.image }}
+                                    
                         
                                 <h1>{{object.name}}</h1>
                             </span> <span class="float-end price-hp">
                                 <br>&dollar;{{object.price}}</span> </div>
                         <h5 class="card-title">{{object.description}}</h5>
+                        <h5 class="card-title">stock: {{object.stock}}</h5>
                         <h5 class="card-title">codigo: {{object.sku}}</h5>
                         <div class="text-center my-4"> <a href="#" class="btn btn-warning">Comprar</a> </div>
                         <div class="text-center my-4"> <a href="/drink/edit-drinks/{{object.id}}" class="btn btn-warning">Editar</a></div>

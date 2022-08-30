@@ -61,14 +61,14 @@ def user_profile(request, pk):
         if form.is_valid():
             profile = User.objects.get(id=pk)
             profile2 = User_profile.objects.get()
-            profile.first_name = form.cleaned_data['first_name']
-            profile.last_name = form.cleaned_data['last_name']
+            profile.first_name = form.cleaned_data['nombre']
+            profile.last_name = form.cleaned_data['apellido']
             profile.email = form.cleaned_data['email']
-            profile2.address = form.cleaned_data['address']
-            profile2.phone = form.cleaned_data['phone']
+            profile2.address = form.cleaned_data['direccion']
+            profile2.phone = form.cleaned_data['telefono']
             profile.password1 = form.cleaned_data['password1']
             profile.password2= form.cleaned_data['password2']
-            profile2.image =form.cleaned_data['image']
+            profile2.image =form.cleaned_data['imagen']
             profile2.save()
             profile.save()
 
@@ -81,14 +81,14 @@ def user_profile(request, pk):
             profile2 = User_profile.objects.get()
             form = Form_profile (initial={
                 #'username': profile.username,
-                'first_name': profile.first_name,
-                'last_name': profile.last_name,
+                'nombre': profile.first_name,
+                'apellido': profile.last_name,
                 'email': profile.email,
-                'address':profile2.address,
-                'phone': profile2.phone,
+                'direccion':profile2.address,
+                'telefono': profile2.phone,
                 'password': profile.password,
                 'password': profile.password,
-                'image':profile2.image })
+                'imagen':profile2.image })
             context = {'form': form}
             return render(request, 'user/user_profile.html', context=context)
         else:

@@ -68,4 +68,4 @@ def test(request):
         'products': dic
     }
     
-    return render(request, "test2.html", context=context)
+    return render(request, "test.html", context=context)

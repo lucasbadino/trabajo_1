@@ -15,11 +15,11 @@ class User_registracion_form(UserCreationForm):
         
       
 class Form_profile(forms.Form):
-    first_name = forms.CharField(max_length=100)
-    last_name = forms.CharField(max_length=100)
+    nombre = forms.CharField(max_length=100)
+    apellido = forms.CharField(max_length=100)
     email = forms.EmailField(max_length=100)
-    phone = forms.CharField(max_length=20)
-    address = forms.CharField(max_length=100 )
+    telefono = forms.CharField(max_length=20)
+    direccion = forms.CharField(max_length=100 )
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput, required=False)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput, required=False)
-    image = forms.ImageField(required=False)
+    imagen = forms.ImageField(required=False)

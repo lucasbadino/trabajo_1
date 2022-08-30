@@ -7,7 +7,7 @@ Editor de Bebidas
 {%block text%}
 
 
-
+<div class="container" style="align-items:center ; max-width:900px ;">
 <form action="" method='POST' enctype="multipart/form-data" style="margin-left: 35% ; margin-top: 7%; margin-bottom: 10%; ">
     {% csrf_token %}
    
@@ -18,5 +18,5 @@ Editor de Bebidas
     <button type="submit" class="btn btn-primary">Enviar</button>
     <input type="button" value="Volver"  onclick="history.back()">
 </form>
-
+</div>
 {% endblock %}

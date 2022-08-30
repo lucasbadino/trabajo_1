@@ -6,7 +6,7 @@ Borrar Carnes
 
 {%block text%}
 
-<p>Nombre del Producto:{{product.name}}</p>
+<h1 style="text-align:center ;margin-top: 3rem;">Seguro que quieres eliminar {{product.name}}???</h1>
 
 <form action="" method='POST' enctype="multipart/form-data" style="margin-left: 35% ; margin-top: 7%; margin-bottom: 10%; ">
     {% csrf_token %}

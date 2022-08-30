@@ -32,9 +32,9 @@ Panaderia
                                 <h1>{{i.name}}</h1>
                             </span> <span class="float-end price-hp">
                                 <br>&dollar;{{i.price}}</span> </div>
-                        <h5 class="card-title">{{i.description}}</h5>
                         <h5 class="card-title">codigo: {{i.sku}}</h5>
                         <div class="text-center my-4"> <a href="#" class="btn btn-warning">Comprar</a> </div>
+                        <div class="text-center my-4"> <a href="{% url 'Add' i.id %}" class="btn btn-warning">Agregar al carrito</a> </div>
                         {% if request.user.is_superuser %}
                         <div class="text-center my-4"> <a href="/bakery/edit-bakeries/{{i.id}}" class="btn btn-warning">Editar</a></div>
                         <div class="text-center my-4"> <a href="/bakery/delete-bakeries/{{i.id}}" class="btn btn-warning">Borrar</a></div>
