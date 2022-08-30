@@ -1,0 +1,63 @@
+
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+    {% block link %}
+      <link type="text/css" href="{% static '/css/style.css' %}" rel="stylesheet" />
+    {%endblock%}
+    
+    {% block title %}
+        Test
+    {% endblock %}
+
+    {%block text%}
+    <div class="alert alert-primary" role="alert">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="row" colspan="3" class="text-center">CARRITO</th>
+    </tr>
+    <tr>
+      <th scope="col">NOMBRE</th>
+      <th scope="col">PRECIO</th>
+      <th scope="col">CANTIDAD</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% if request.session.cart.items %}
+  {% for key, value in request.session.cart.items %}
+    <tr>
+      <td>{{value.name}}</td>
+      <td>{{value.amount}}</td>
+      <td>{{value.quantity}}
+        <a href="{% url 'Add' value.product_id %}" class="badge btn btn-dark badge-dark">+</a>
+        <a href="{% url 'Sub' value.product_id %}" class="badge btn btn-dark badge-dark">-</a>
+      </td>
+    </tr>
+  {% endfor %}
+  {% else %}
+  <tr>
+      <td colspan="3">
+          <div class="alert alert-danger text-center"> Sin Productos </div>
+      </td>
+  </tr>
+  {% endif %}
+    <tr>
+      <th scope="row">Total:</th>
+      <td colspan="2">$ {{total_cart}}</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+</div>
+<div class="row text-center">
+    <div class="col-6"><a href="{% url 'Clear' %}" class="btn btn-danger">Limpiar</a></div>
+    <div class="col-6"><a href="#" class="btn btn-success">Guardar</a></div>
+</div>
+
+    
+
+    {%endblock%}
+

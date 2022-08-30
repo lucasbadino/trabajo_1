@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'bakery',
     'users',
     'crispy_forms',
-    'stock'
+    'stock',
+    'cart'
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -70,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processor.total_cart',
             ],
         },
     },
