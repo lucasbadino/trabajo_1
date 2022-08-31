@@ -3,7 +3,7 @@ from meat.models import *
 from random import randint
 from django.templatetags.static import static
 from meat.forms import Form_meats
-from django.views.generic import DetailView
+from django.views.generic import DetailView,UpdateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
@@ -52,36 +52,41 @@ def create_meats(request):
             return redirect("login")
     return render(request, 'meat/create_meats.html', context=context)
 
-@login_required
-def edit_meats(request, pk):
-    if request.method == 'POST':
-        form = Form_meats(request.POST, request.FILES)
-        if form.is_valid():
-            product = Products.objects.get(id=pk)
-            product.name = form.cleaned_data['nombre']
-            product.price = form.cleaned_data['precio']
-            product.description = form.cleaned_data['descripcion']
-            product.stock = form.cleaned_data['stock']
-            product.image = form.cleaned_data['imagen']
-            product.save()
+class Update_meats(LoginRequiredMixin, UpdateView):
+    model = Products
+    fields = ['name','description', 'sku', 'price','image']
+    template_name = 'meat/edit_meats.html'
+    success_url = '/all/'
+# @login_required
+# def edit_meats(request, pk):
+#     if request.method == 'POST':
+#         form = Form_meats(request.POST, request.FILES)
+#         if form.is_valid():
+#             product = Products.objects.get(id=pk)
+#             product.name = form.cleaned_data['nombre']
+#             product.price = form.cleaned_data['precio']
+#             product.description = form.cleaned_data['descripcion']
+#             product.stock = form.cleaned_data['stock']
+#             product.image = form.cleaned_data['imagen']
+#             product.save()
 
-            return redirect(list_of_meats)
+#             return redirect(list_of_meats)
 
-    elif request.method == 'GET':
-        if request.user.is_superuser:
-            product = Products.objects.get(id=pk)
+#     elif request.method == 'GET':
+#         if request.user.is_superuser:
+#             product = Products.objects.get(id=pk)
 
-            form = Form_meats (initial={
-                'nombre': product.name,
-                'precio': product.price,
-                'descripcion': product.description,
-                'stock': product.stock,
-                'imagen': product.image,
-                })
-            context = {'form': form}
-            return render(request, 'meat/edit_meats.html', context=context)
-        else:
-            return redirect("login")
+#             form = Form_meats (initial={
+#                 'nombre': product.name,
+#                 'precio': product.price,
+#                 'descripcion': product.description,
+#                 'stock': product.stock,
+#                 'imagen': product.image,
+#                 })
+#             context = {'form': form}
+#             return render(request, 'meat/edit_meats.html', context=context)
+#         else:
+#             return redirect("login")
     
 
 

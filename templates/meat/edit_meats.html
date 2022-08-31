@@ -5,6 +5,7 @@ Editor de Carnes
 {%endblock%}
 
 {%block text%}
+{%if request.user.is_superuser%}
 
 
 <div class="container" style="align-items:center ; max-width:900px ;">
@@ -17,4 +18,7 @@ Editor de Carnes
     <input type="button" value="Volver"  onclick="history.back()">
 </form>
 </div>
+{%else%}
+<meta http-equiv="refresh" content="0.2; URL=/user/login" />
+{%endif%}
 {% endblock %}

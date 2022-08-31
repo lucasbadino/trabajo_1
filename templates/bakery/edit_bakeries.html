@@ -6,6 +6,7 @@ Editor de Panes
 
 {%block text%}
 
+{%if request.user.is_superuser%}
 
 <div class="container" style="align-items:center ; max-width:900px ;">
 <form action="" method='POST' enctype="multipart/form-data" style="margin-left: 35% ; margin-top: 7%; margin-bottom: 10%; ">
@@ -18,4 +19,7 @@ Editor de Panes
     
 </form>
 </div>
+{%else%}
+<meta http-equiv="refresh" content="0.2; URL=/user/login" />
+{%endif%}
 {% endblock %}
