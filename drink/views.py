@@ -52,7 +52,7 @@ def create_drinks(request):
 class Update_drinks(LoginRequiredMixin, UpdateView):
     model = Drinks
     fields = ['name','description', 'sku', 'price','image']
-    template_name = 'drink/edit_drinks'
+    template_name = 'drink/edit_drinks.html'
     success_url = '/all/'
 
 @login_required

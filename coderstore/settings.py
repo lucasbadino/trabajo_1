@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'users',
     'crispy_forms',
     'stock',
-    'cart'
+    'cart',
+    'django_cleanup.apps.CleanupConfig'
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

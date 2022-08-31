@@ -20,6 +20,8 @@ def login_request(request):
             password = form.cleaned_data.get('password')
             user = authenticate(username = username, password = password)
             if user is not None:
+                
+                
                 login(request, user)
                 meat = Products.objects.all()
                 drink = Drinks .objects.all()
@@ -28,7 +30,11 @@ def login_request(request):
                 context = {	
                     'all': dic
                                     }
+                if 'next' in request.POST:
+                    return redirect(request.POST.get('next'))
             return render (request , 'all_products.html', context=context)
+            
+                
         form = AuthenticationForm()
         return render(request, 'user/login.html', {'error': 'Formulario invalido', 'form': form})
     elif request.method == 'GET':
@@ -79,7 +85,7 @@ def user_profile(request, pk):
                     profile2.image = request.FILES['imagen']
                     profile2.save()
             else:
-                os.remove(profile2.image.path)
+                profile2.image.delete(profile2.image.path)
             profile2.save()
             profile.save()
             return redirect('confirmation')
