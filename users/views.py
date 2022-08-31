@@ -8,6 +8,7 @@ from django.contrib.auth import login, logout, authenticate
 from coderstore.views import Products,Drinks,Bakeries
 from users.models import *
 from django.contrib.auth.models import User
+import os
 
 
 def login_request(request):
@@ -68,10 +69,19 @@ def user_profile(request, pk):
             profile2.phone = form.cleaned_data['telefono']
             profile.password1 = form.cleaned_data['password1']
             profile.password2= form.cleaned_data['password2']
-            profile2.image =form.cleaned_data['imagen']
+            if len(request.FILES) != 0:
+                try:
+                    if len(profile2.image) > 0:
+                        os.remove(profile2.image.path)
+                    profile2.image = request.FILES['imagen']
+                    profile2.save()
+                except:
+                    profile2.image = request.FILES['imagen']
+                    profile2.save()
+            else:
+                os.remove(profile2.image.path)
             profile2.save()
             profile.save()
-
             return redirect('confirmation')
 
     elif request.method == 'GET':

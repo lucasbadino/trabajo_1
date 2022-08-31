@@ -12,7 +12,11 @@
       <div class="panel">
           <div class="user-heading round">
               <a href="#">
+                {%if profile.image%}
                   <img src="{{profile.image.url}}" alt="">
+                  {%else%}
+                  <img src='https://cdn.xxl.thumbs.canstockphoto.com/do-not-symbol-3d-people-human-character-in-warning-pose-with-do-not-symbol-3d-render-clipart_csp6638201.jpg' alt="">
+                  {%endif%}
               </a>
               <h1>{{request.user.first_name}} <br> {{request.user.last_name}}</h1>
               <h6>{{profile.email}}</h6>
