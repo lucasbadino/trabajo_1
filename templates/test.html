@@ -33,13 +33,9 @@
       <td>{{value.name}}</td>
       <td>{{value.amount}}</td>
       <td>{{value.quantity}}</td>
-      <td>{{value.stock}}</td>
-        {% if value.stock > '1' %}
-        <a href="{% url 'Add' value.product_id %}" class="badge btn btn-dark badge-dark">+</a>
-        <a href="{% url 'Sub' value.product_id %}" class="badge btn btn-dark badge-dark">-</a>
-        {%else%}
-        <h5>No tenemos stock suficiente</h5>
-        {%endif%}
+      <td>
+      <a href="{% url 'Add' value.product_id %}" class="badge btn btn-dark badge-dark">+</a>
+      <a href="{% url 'Sub' value.product_id %}" class="badge btn btn-dark badge-dark">-</a>
       </td>
     </tr>
   {% endfor %}
