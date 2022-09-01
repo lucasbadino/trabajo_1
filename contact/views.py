@@ -9,6 +9,7 @@ def contact(request):
       form = Contact_form(data= request.POST)
       if form.is_valid():
          form.save()
+         return redirect('inicio')
       else:
          data['form'] = form
-   return render(request, 'home_page.html', data)
+   return render(request, 'contact.html', data)

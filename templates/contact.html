@@ -16,7 +16,7 @@ Contacto
     {% csrf_token %}
 
     {{form | crispy}}
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-primary" onClick="javascript: return confirm('Desas enviar el comentario');">Enviar</button>
     </form>
     
 
