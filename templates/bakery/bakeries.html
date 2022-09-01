@@ -1,11 +1,164 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title%}
+<head>
+  <!--{% block link %}
 
-Panaderia
+  {%endblock%}-->
 
-{% endblock %}
+  <link type="text/css" href="{% static '/css/style.css' %}" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <title>
+  panaderia
+  </title>
 
+</head>
+
+<body style="background-image:url('https://img.freepik.com/free-vector/smooth-white-wave-background_52683-55288.jpg?w=2000') ;">
+  <nav class="navbar navbar-expand-md navbar-light bg-faded">
+    <a href="/" class="navbar-brand">CoderStore</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar5">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;margin-right: 0%;">
+        <li class="nav-item"><a class="nav-link" href="/meat/meats/">Carnes</a></li>
+        <li class="nav-item"><a class="nav-link" href="/drink/drinks/"> Bebidas</a></li>
+        <li class="nav-item"><a class="nav-link" href="/bakery/bakeries/">Panderia</a></li>
+      </ul>
+      {% if request.user.is_authenticated and request.user.is_superuser %}
+        <li class="nav-item"><a class="nav-link" style="color: rgba(0, 0, 0, 0.562);" href="/stock/stock/">Stock</a></li>
+      
+      {%endif%}
+      <form class="mx-2 my-auto d-inline w-100" action="/search/" method="GET">
+        <div class="input-group">
+          <input type="text" class="form-control border border-right-0 mr-auto my-2 my-lg-0 s"
+            placeholder="&#128269Search..." viewBox="0 0 16 16" aria-label="Search" name="search">
+          <span class="input-group-append">
+            
+          </span>
+        </div>
+      </form>
+
+      <li class="nav-item" ><a class="nav-link" style="color: rgba(0, 0, 0, 0.562);"href="/contact/contact/">Contacto</a></li>
+      {% if request.user.is_authenticated %}
+      <div id="container">
+        <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+              Perfil
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/user/user-complete/{{request.user.id}}/">Mas info</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="/user/logout/">Logout</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+          </li>
+        </ul>
+        {% else %}
+        <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll">
+          <li class="nav-item"> <a class="nav-link" href="/user/login/">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="/user/register/">Singup</a></li>
+
+
+        </ul>
+        <div class="icon-cart" style="float: left">
+          <div class="cart-line-1" style="background-color: #E5E9EA"></div>
+          <div class="cart-line-2" style="background-color: #E5E9EA"></div>
+          <div class="cart-line-3" style="background-color: #E5E9EA"></div>
+          <div class="cart-wheel" style="background-color: #E5E9EA"></div>
+        </div>
+        
+        {%endif%}
+      </div>
+      <a href="/cart/test/"><img alt="Carrito" src="https://cdn-icons-png.flaticon.com/512/107/107831.png" width="30" height="20"></a>
+      </ul>
+      </ul>
+    </div>
+
+
+
+
+  </nav>
+  <div class="cater3-movingBG">
+    <div class="flyinTxtCont">
+      <div class="flyIn lineOne">Coder</div>
+      <div class="flyIn lineTwo">Store </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="container-fluid bg-trasparent my-4 p-3">
+      <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3" >
+
+        {% for i in all %}
+        <div class="col" style="margin:2%">
+          <div class="card h-100 shadow-sm">
+            {% if i.image %}
+            <img src='{{i.image.url}}' class="card-img-top" alt="">
+            {% else %}
+            <img
+              src='https://media.discordapp.net/attachments/1004393238276362365/1005986351855964250/coderhouse-logo.png'
+              class="card-img-top" alt="">
+            {% endif %}
+            <div class="card-body" style="margin-bottom:20%;">
+              <div class="clearfix mb-3"> <span>
+                  <h1>{{i.name}}</h1>
+                </span> <span class="float-end price-hp">
+                  <br>&dollar;{{i.price}}</span> </div>
+              <h5 class="card-title">stock: {{i.stock}}</h5>
+              <h5 class="card-title">sku: {{i.sku}}</h5>
+              <a href="#" class="btn btn-primary btn-md success" role="button" aria-pressed="true">Comprar</a>
+              <div class="text-center my-4"> <a href="{% url 'Add' i.id %}" class="btn btn-warning">Agregar al carrito</a> </div>
+              
+              {% if request.user.is_superuser and i.unic == 'd' %}
+              <a href="/../drink/edit-drinks/{{i.id}}/" class="btn btn-info btn-md active" role="button" aria-pressed="true">Editar</a>
+              <a href="/../drink/delete-drinks/{{i.id}}/" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Eliminar</a>
+              <a href="/drink/detail-drinks/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
+              {% elif request.user.is_superuser and i.unic == 'm' %}
+              
+              <a href="/../meat/edit-meats/{{i.id}}/" class="btn btn-info btn-md active" role="button" aria-pressed="true">Editar</a>
+              <a href="/../meat/delete-meats/{{i.id}}/" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Eliminar</a>
+              <a href="/../meat/detail-meats/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
+              {% elif request.user.is_superuser and i.unic == 'b' %}
+                         
+              <a href="/../bakery/edit-bakeries/{{i.id}}/" class="btn btn-info btn-md active" role="button" aria-pressed="true">Editar</a>
+              <a href="/../bakery/delete-bakeries/{{i.id}}/" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Eliminar</a>
+              <a href="/../bakery/detail-bakeries/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
+              {% elif not request.user.is_superuser and i.unic == 'd' %}
+              <a href="/drink/detail-drinks/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
+              {% elif not request.user.is_superuser and i.unic == 'm' %}
+              <a href="/../meat/detail-meats/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
+              
+              {% elif not request.user.is_superuser and i.unic == 'b' %}
+              <a href="/../bakery/detail-bakeries/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
+              
+              {% endif %}
+              
+            </div>
+            
+          </div>
+        </div>
+
+
+
+        {% endfor %}
+
+
+
+
+      </div>
+</main>
 {%block text%}
 
 <main>
@@ -52,3 +205,89 @@ Panaderia
        
        
        {% endblock %}
+       <!-- Footer -->
+      <footer class="text-center text-lg-start bg-light text-muted">
+        <!-- Section: Links  -->
+       <section class="">
+         <div class="container text-center text-md-start mt-5">
+           <!-- Grid row -->
+           <div class="row mt-3">
+             <!-- Grid column -->
+             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+               <!-- Content -->
+               <h6 class="text-uppercase fw-bold mb-4">
+                 <i class="fas fa-gem me-3"></i>CoderStore
+               </h6>
+               <p>
+                 Somos una empresa familiar con años de experiencia en el rubro, ofreciendo los mejores productos del mercado
+               </p>
+             </div>
+             <!-- Grid column -->
+
+             <!-- Grid column -->
+             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+               <!-- Links -->
+               <h6 class="text-uppercase fw-bold mb-4">
+                 Productos
+               </h6>
+               <p>
+                 <a href="/../meat/meats/" class="text-reset">Carnes</a>
+               </p>
+               <p>
+                 <a href="/bakery/bakeries/" class="text-reset">Panderia</a>
+               </p>
+               <p>
+                 <a href="/drink/drinks/" class="text-reset">Bebidas</a>
+               </p>
+             </div>
+             <!-- Grid column -->
+
+             <!-- Grid column -->
+             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+               <!-- Links -->
+               <h6 class="text-uppercase fw-bold mb-4">
+                 Links
+               </h6>
+               <p>
+                 <a href="#!" class="text-reset">About us</a>
+               </p>
+             </div>
+             <!-- Grid column -->
+
+             <!-- Grid column -->
+             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+               <!-- Links -->
+               <h6 class="text-uppercase fw-bold mb-4">Contacto</h6>
+
+               <p><i class="fas fa-home me-3"></i> Buenos Aires, BS 1000, AR</p>
+               <p>
+                 <i class="fas fa-envelope me-3"></i>
+                 info@coderstore.com
+               </p>
+               <p><i class="fas fa-phone me-3"></i> + 54 9 351 456987</p>
+               <p><i class="fas fa-print me-3"></i> + 54 9 351 456987</p>
+               <a href="/contact/contact/" class="text-reset">Contactenos</a>
+             </div>
+             <!-- Grid column -->
+           </div>
+           <!-- Grid row -->
+         </div>
+       </section>
+       <!-- Section: Links  -->
+
+       <!-- Copyright -->
+       <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+         © 2022 Copyright:
+         <a class="text-reset fw-bold" href="/../">CoderStore</a>
+       </div>
+       <!-- Copyright -->
+     </footer>
+     <!-- Footer -->
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+ integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+ integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+</html>

@@ -14,7 +14,19 @@
     {% endblock %}
 
     {%block text%}  
-    <div style="margin:3% ;">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown"style="margin-left:1% ; margin-top:2rem">    
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Crear Nuevo
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <a class="dropdown-item" href="/meat/create-meats/">Nueva Carne</a>
+          <a class="dropdown-item" href="/bakery/create-bakeries/">Nueva Panes</a>
+          <a class="dropdown-item" href="/drink/create-drinks/">Nueva Bebida</a>
+        </div>
+      </div>
+    </div>
+    <div style="margin:1% ;">
     <table class="table table-striped">
         <thead>
           <tr>

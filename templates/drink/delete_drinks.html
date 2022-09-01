@@ -11,7 +11,8 @@ Borrar Bebidas
 
 <form action="" method='POST' style="margin-left: 35% ; margin-top: 7%; margin-bottom: 10%; ">
     {% csrf_token %}
-    <button type="submit" class="btn btn-primary">Borrar</button>
+    <button type="submit" class="btn btn-primary" onClick="javascript: return confirm('¿Estas seguro?');">Borrar</button>
+    <input type="button" value="Volver"  onclick="history.back()">
 </form>
 
 {% endblock %}
