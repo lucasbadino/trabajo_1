@@ -9,7 +9,7 @@ class Bakeries(models.Model):
     sku = models.IntegerField(default= rand)
     price = models.FloatField()
     stock = models.IntegerField(default= 0)
-    image = models.ImageField(upload_to= 'products_image_bakeries', blank=True)
+    image = models.ImageField(upload_to= 'products_image_bakeries', blank=True, null=True)
     unic = models.CharField(max_length=1, default='b')
        
     def __str__(self):

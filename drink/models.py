@@ -12,7 +12,7 @@ class Drinks(models.Model):
     sku = models.IntegerField(default= rand)
     price = models.FloatField()
     stock = models.IntegerField(default= 0)
-    image = models.ImageField(upload_to= 'products_image_drinks', blank=True)
+    image = models.ImageField(upload_to= 'products_image_drinks', blank=True, null=True)
     unic = models.CharField(max_length=1, default='d')
     
     def __str__(self):
