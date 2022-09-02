@@ -6,9 +6,7 @@ from cart.cart import Cart
 # Create your views here.
 
 
-meat = Products.objects.all()
-drink = Drinks .objects.all()
-bakery= Bakeries.objects.all()
+
 
 
 def add_product(request, product_id):
@@ -59,13 +57,22 @@ def clear_cart(request):
 
 
 def test(request):
+    return render(request, "prueba.html")
+
+def checkout(request):
+    total = 0
+    if request.user.is_authenticated:
+        if "cart" in request.session.keys():
+            for key, value in request.session["cart"].items():
+                total += int(value["amount"])
+                context = {
+                    'product' : total
+                }
+    return render(request, "cart/checkout.html" , context=context)
     
-    meat = Products.objects.all()
-    drink = Drinks .objects.all()
-    bakery = Bakeries.objects.all()
-    dic = meat.union(drink, bakery)
-    context = {
-        'products': dic
-    }
-    
-    return render(request, "test.html", context=context)
+
+# def add_product(request,pk):
+#     cart=Cart(request)
+#     product=Product.objects.get(id=pk)
+#     cart.add(product=product)
+#     return redirect ('/Productos/Shop_single/%d/?valido'%pk)

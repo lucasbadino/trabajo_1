@@ -11,6 +11,7 @@ Contacto
 {% endblock %}
 
 {%block text%}
+ 
     <form action="" method='POST' enctype="multipart/form-data"
     style="margin-left: 35% ; margin-top: 7%; margin-bottom: 10%; margin-right: 35%">
     {% csrf_token %}
@@ -19,6 +20,5 @@ Contacto
         <button type="submit" class="btn btn-primary" onClick="javascript: return confirm('Desas enviar el comentario');">Enviar</button>
     </form>
     
-
     
 {%endblock%}

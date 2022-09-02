@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block link %}
+      
+    {%endblock%}
+{%block title%}
+Finalizar compra
+{%endblock%}
+
+{%block text%}
+
+
+    
+
+
+    <div class="card text-center">
+        <div class="card-body">
+          <h1 class="card-title">PAGO</h1>
+          <h3>total a pagar:$ {{product}}</h3>
+          <p class="card-text">Para finalizar el pago realizar la transferencia bancaria con los siguientes datos</p>
+          <p class="card-text">CBU: Esto es solo para fines de pruebas</p>
+          <p class="card-text">CUIT: Esto es solo para fines de pruebas</p>
+          <p class="card-text">Nº cuenta: Esto es solo para fines de pruebas </p>
+          <p class="card-text">Razon social: Coder Store S.A.</p>
+          
+        </div>
+      </div>
+    
+{% endblock %}
