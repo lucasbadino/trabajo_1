@@ -8,30 +8,30 @@ def add_product(request,product_id):
     cart=Cart(request)
     product=Products.objects.get(id=product_id)
     cart.add(product)
-    return redirect ("test")
+    return redirect ("cart")
   
   
 def delete_product(request, product_id):
     cart = Cart(request)
     product=Products.objects.get(id=product_id)
     cart.delete(product)
-    return redirect("test")
+    return redirect("cart")
 
 
 def subtract_product(request, product_id):
     cart = Cart(request)
     product=Products.objects.get(id=product_id)
     cart.subtract(product)
-    return redirect("test")
+    return redirect("cart")
 
 def clear_cart(request):
     cart = Cart(request)
     cart.clear()
-    return redirect("test")
+    return redirect("cart")
 
 
-def test(request):
-    return render(request, "prueba.html")
+def cart(request):
+    return render(request, "cart/cart.html")
 
 @login_required
 def checkout(request):

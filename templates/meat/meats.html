@@ -81,7 +81,7 @@
         
         {%endif%}
       </div>
-      <a href="/cart/test/"><img alt="Carrito" src="https://cdn-icons-png.flaticon.com/512/107/107831.png" width="30" height="20"></a>
+      <a href="/cart/cart/"><img alt="Carrito" src="https://cdn-icons-png.flaticon.com/512/107/107831.png" width="30" height="20"></a>
       </ul>
       </ul>
     </div>
@@ -104,7 +104,7 @@
     <div class="d-flex justify-content-center row">
       <div class="col-md-10">
         {% for i in list %}
-        {%if i.category ==  2%}
+        {%if i.category ==  1%}
         <div class="row p-2 bg-white border rounded" style="background-image:url('https://img.freepik.com/free-vector/smooth-white-wave-background_52683-55288.jpg?w=2000') ;margin-top:1% ;margin-bottom:1%">
           {% if i.image %}
           <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image "style="max-height:180px"

@@ -83,7 +83,7 @@
 
         {%endif%}
       </div>
-      <a href="/cart/test/"><img alt="Carrito" src="https://cdn-icons-png.flaticon.com/512/107/107831.png" width="30"
+      <a href="/cart/cart/"><img alt="Carrito" src="https://cdn-icons-png.flaticon.com/512/107/107831.png" width="30"
           height="20"></a>
       </ul>
       </ul>
@@ -104,39 +104,45 @@
     <div class="d-flex justify-content-center row">
       <div class="col-md-10">
         {% for i in list %}
-        <div class="row p-2 bg-white border rounded" style="background-image:url('https://img.freepik.com/free-vector/smooth-white-wave-background_52683-55288.jpg?w=2000') ;margin-top:1% ;margin-bottom:1%">
+        <div class="row p-2 bg-white border rounded"
+          style="background-image:url('https://img.freepik.com/free-vector/smooth-white-wave-background_52683-55288.jpg?w=2000') ;margin-top:1% ;margin-bottom:1%">
           {% if i.image %}
-          <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image "style="max-height:180px"
-              src="{{i.image.url}}"></div>
+          <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image "
+              style="max-height:180px" src="{{i.image.url}}"></div>
 
           {% else %}
           <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
-              src="https://media.discordapp.net/attachments/1004393238276362365/1005986351855964250/coderhouse-logo.png"></div>
+              src="https://media.discordapp.net/attachments/1004393238276362365/1005986351855964250/coderhouse-logo.png">
+          </div>
           {% endif %}
           <div class="col-md-6 mt-1">
             <h3>{{i.name}}</h3>
             <div class="d-flex flex-row">
               <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                  class="fa fa-star"></i></div><span><h5>{{i.description}}</h5></span>
+                  class="fa fa-star"></i></div><span>
+                <h5>{{i.description}}</h5>
+              </span>
             </div>
             <div class="mt-1 mb-1 spec-1"></div>
-            <div class="mt-1 mb-1 spec-1"><h6>Stock: {{i.stock}}
-            </h6></div>
+            <div class="mt-1 mb-1 spec-1">
+              <h6>Stock: {{i.stock}}
+              </h6>
+            </div>
             <p class="text-justify text-truncate para mb-0"><br><br></p>
           </div>
           <div class="align-items-center align-content-center col-md-3 border-left mt-1">
             <div class="d-flex flex-row align-items-center">
-              <h4 class="mr-2 col d-flex justify-content-center" >${{i.price}}</h4>
-                        </div>
+              <h4 class="mr-2 col d-flex justify-content-center">${{i.price}}</h4>
+            </div>
             <h6 class="text-success">Envio gratis</h6>
             <div class="d-flex flex-column mt-4">
-              <a href="/bakery/detail-bakeries/{{i.id}}"class="btn btn-primary btn-sm"
-              ><button class="btn btn-primary btn-sm"
-                type="button">Detalles</button></a>
-                
-                <a href="{% url 'Add' i.id %}"class="btn btn-light btn-sm mt-2"><button class="btn btn-outline-primary btn-sm mt-2" type="button">Agregar al carrito</button></a>
-              </div>
-                
+              <a href="/bakery/detail-bakeries/{{i.id}}" class="btn btn-primary btn-sm"><button
+                  class="btn btn-primary btn-sm" type="button">Detalles</button></a>
+
+              <a href="{% url 'Add' i.id %}" class="btn btn-light btn-sm mt-2"><button
+                  class="btn btn-outline-primary btn-sm mt-2" type="button">Agregar al carrito</button></a>
+            </div>
+
           </div>
         </div>
         {% endfor %}

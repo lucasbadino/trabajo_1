@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}
+Carrito
+{% endblock %}
+
+
+<body>
+  {% block text %}
+  <section class="h-100 gradient-custom">
+    <div class="container py-5">
+      <div class="row d-flex justify-content-center my-4">
+        <div class="col-md-8">
+          <div class="card mb-4">
+            <div class="card-header py-3">
+              <h5 class="mb-0">Carrito </h5>
+            </div>
+
+            {% if request.session.cart.items %}
+            {% for key, value in request.session.cart.items %}
+
+            <div class="card-body">
+              <!-- Single item -->
+              <div class="row">
+                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                   <!-- Image -->
+                   <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                    {% if value.image %}
+                      <img src="{{ value.image }}"
+                      class="w-100" alt="" />
+                      <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                      </a>
+                    {% else %}
+                      <img src=""
+                      class="w-100" alt="" />
+                      <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                      </a>
+                    {% endif %}
+                  </div>
+                  <!-- Image -->
+                </div>
+
+                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                  <!-- Data -->
+                  <p><strong>{{value.name}}</strong></p>
+                  <p>Stock: {{value.stock}}</p>
+
+                  <!-- <p>Size: M</p> -->
+
+                  <a href="{% url 'Delete' value.product_id %}">
+                    <button type="button" class="btn btn-success btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                      title="Remove item">Eliminar producto
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </a>
+
+                  <!-- Data -->
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+
+
+                  <!-- Quantity -->
+                  <p></p>
+                  <div class="d-flex mb-1">
+
+                    <a href="{% url 'Sub' value.product_id %}">
+
+
+                      <button class="btn btn-success ">
+                        <i class="fas fa-minus">-</i>
+                      </button>
+                    </a>
+                    <div class="form-outline ">
+                      <p class="form-control">{{value.quantity}}</p>
+                    </div>
+
+                    <a href="{% url 'Add' value.product_id %}">
+                      <button class="btn btn-success ">
+                        <i class="fas fa-plus">+</i>
+                      </button>
+                    </a>
+
+                  </div>
+                  <!-- Quantity -->
+
+                  <!-- Price -->
+                  <p></p>
+                  <p class="text-start text-md-center">
+                    Precio: <strong>${{value.amount}}</strong>
+                  </p>
+                  <!-- Price -->
+                </div>
+              </div>
+              <!-- Single item -->
+
+              <hr class="my-4" />
+            </div>
+
+            {% endfor %}
+            {% endif %}
+            <!-- vaciar carrito -->
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+              <a href="{% url 'Clear' %}">
+                <button type="button" class="btn btn-success btn-md " title="Remove cart">Vaciar carrito
+                  <i class="fas fa-trash"></i>
+                </button>
+              </a>
+            </div>
+
+          </div>
+
+          <div class="card mb-4 mb-lg-0">
+            <div class="card-body">
+              <p><strong>Metodos de pago</strong></p>
+              <img class="me-2" width="45px"
+                src="https://infonegocios.info/content/images/2022/07/22/321319/conversions/linkbanelco-medium-size.jpg"
+                alt="Link pagos" />
+              <img class="me-2" width="45px"
+                src="https://thumbs.dreamstime.com/z/d%C3%A9-sostener-el-dinero-cuentas-disponibles-tipo-de-pago-del-efectivo-vector-la-enfermedad-112009512.jpg"
+                alt="Pago en efectivo" />
+              <img class="me-2" width="45px"
+                src="https://woocommerce.com/wp-content/uploads/2021/05/fb-mercado-pago-v2@2x.png" alt="mercadopago" />
+              <img class="me-2" width="45px"
+                src="https://norteonline.com.ar/wp-content/uploads/2020/04/WhatsApp-Image-2020-04-15-at-20.02.46.jpeg"
+                alt="pago en terminales de pago" />
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-header py-3">
+              <h5 class="mb-0">Resumen</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                  Productos
+                  <span>${{total_cart}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+
+                  <span></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                  <div>
+                    <strong>Total </strong>
+                  </div>
+                  <span><strong>${{total_cart}}</strong></span>
+                </li>
+              </ul>
+              <a href="/cart/checkout/">
+                <button type="button" class="btn btn-success btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                  title="Remove item">Comprar
+                  <i class="fas fa-trash"></i>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endblock %}

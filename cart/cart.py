@@ -35,6 +35,7 @@ class Cart:
                     "name": product.name,
                     "amount": product.price,
                     "quantity": 1,
+                    "image": product.image.url,
                 }
             else:
                 self.cart[id]["quantity"] += 1
@@ -48,6 +49,7 @@ class Cart:
                     "name": product.name,
                     "amount": product.price,
                     "quantity": 1,
+                    "image": product.image.url,
                 }
             else:
                 self.cart[id]["quantity"] += 1
