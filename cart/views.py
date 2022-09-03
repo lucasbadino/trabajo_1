@@ -43,5 +43,5 @@ def checkout(request):
                     'product' : total
                 }
     return render(request, "cart/checkout.html" , context=context)
-    
+
 

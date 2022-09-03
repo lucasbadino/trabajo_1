@@ -136,9 +136,16 @@
             </div>
             <h6 class="text-success">Envio gratis</h6>
             <div class="d-flex flex-column mt-4">
+              {%if request.user.is_authenticated and i.category == 2%}
               <a href="/bakery/detail-bakeries/{{i.id}}" class="btn btn-primary btn-sm"><button
                   class="btn btn-primary btn-sm" type="button">Detalles</button></a>
-
+                  {%elif request.user.is_authenticated and i.category == 3%}
+                  <a href="/drink/detail-drinks/{{i.id}}" class="btn btn-primary btn-sm"><button
+                    class="btn btn-primary btn-sm" type="button">Detalles</button></a>
+                  {%elif request.user.is_authenticated and i.category == 1%}
+                  <a href="/meat/detail-meats/{{i.id}}" class="btn btn-primary btn-sm"><button
+                    class="btn btn-primary btn-sm" type="button">Detalles</button></a>
+                      {%endif%}
               <a href="{% url 'Add' i.id %}" class="btn btn-light btn-sm mt-2"><button
                   class="btn btn-outline-primary btn-sm mt-2" type="button">Agregar al carrito</button></a>
             </div>

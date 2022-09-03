@@ -35,8 +35,15 @@ def create_meats(request):
 
         form = Form_product(request.POST, request.FILES)
         if form.is_valid():
-         form.save()
-         return redirect(list_of_meats)
+            Products.objects.create(
+                    name = form.cleaned_data['name'],
+                    price = form.cleaned_data['price'],
+                    description = form.cleaned_data['description'],
+                    stock = form.cleaned_data['stock'],
+                    image = form.cleaned_data['image'],
+                    category = 1
+                )
+        return redirect(list_of_meats)
       
         
     elif request.method == 'GET':

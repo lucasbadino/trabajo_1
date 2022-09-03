@@ -9,39 +9,43 @@ Details
 
 {%block text%}
 
-<main>
-    <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
-        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
-
-
-
-            <div class="col" style= 'margin: auto;'>
-                <div class="card h-100 shadow-sm"> <img
-                        src='{{ object.image.url }}'
-                        class="card-img-top" alt="" >
-                    <div class="card-body">
-                        <div class="clearfix mb-3"> <span>
-                                    
-                        
-                                <h1>{{object.name}}</h1>
-                            </span> <span class="float-end price-hp">
-                                <br>&dollar;{{object.price}}</span> </div>
-                        <h5 class="card-title">{{object.description}}</h5>
-                        <h5 class="card-title">stock: {{object.stock}}</h5>
-                        
-                        <div class="text-center my-4"> <a href="#" class="btn btn-warning">Comprar</a> </div>
-                        <div class="text-center my-4"> <a href="/drink/edit-drinks/{{object.id}}" class="btn btn-warning">Editar</a></div>
-                        <div class="text-center my-4"> <a href="/drink/delete-drinks/{{object.id}}" class="btn btn-warning">Borrar</a></div>
-                    </div>
-                </div>
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-center row">
+      <div class="col-md-10">
+        <div class="row p-2 bg-white border rounded"
+          style="background-image:url('https://img.freepik.com/free-vector/smooth-white-wave-background_52683-55288.jpg?w=2000') ;margin-top:1% ;margin-bottom:1%">
+          <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image "
+              style="max-height:180px" src="{{object.image.url}}"></div>
+          <div class="col-md-6 mt-1">
+            <h3>{{object.name}}</h3>
+            <div class="d-flex flex-row">
+              <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                  class="fa fa-star"></i></div><span>
+                <h5>{{object.description}}</h5>
+              </span>
+            </div>
+            <div class="mt-1 mb-1 spec-1"></div>
+            <div class="mt-1 mb-1 spec-1">
+              <h6>Stock: {{object.stock}}
+              </h6>
+            </div>
+            <p class="text-justify text-truncate para mb-0"><br><br></p>
+          </div>
+          <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+            <div class="d-flex flex-row align-items-center">
+              <h4 class="mr-2 col d-flex justify-content-center">${{object.price}}</h4>
+            </div>
+            <h6 class="text-success">Envio gratis</h6>
+            <div class="d-flex flex-column mt-4">
+              <a href="{% url 'Add' object.id %}" class="btn btn-light btn-sm mt-2"><button
+                  class="btn btn-outline-primary btn-sm mt-2" type="button">Agregar al carrito</button></a>
             </div>
 
-       
-
- </div>
-</div>
-
-</main>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 

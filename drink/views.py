@@ -1,3 +1,4 @@
+
 from django.views.generic import DetailView, UpdateView
 from django.shortcuts import render, redirect
 from product.models import  *
@@ -31,8 +32,15 @@ def create_drinks(request):
     if request.method == 'POST':
         form = Form_product(request.POST, request.FILES)
         if form.is_valid():
-         form.save()
-         return redirect(list_drinks)
+            Products.objects.create(
+                    name = form.cleaned_data['name'],
+                    price = form.cleaned_data['price'],
+                    description = form.cleaned_data['description'],
+                    stock = form.cleaned_data['stock'],
+                    image = form.cleaned_data['image'],
+                    category = 3
+                )
+        return redirect(list_drinks)
       
     elif request.method == 'GET':
         if request.user.is_superuser:
