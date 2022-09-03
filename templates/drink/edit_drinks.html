@@ -6,7 +6,7 @@ Editor de Bebidas
 
 {%block text%}
 {%if request.user.is_superuser%}
-
+<h1 style="text-align:center ;margin-top: 3rem;">Bebidas</h1>
 <div class="container" style="align-items:center ; max-width:900px ;">
 <form action="" method='POST' enctype="multipart/form-data" style="margin-left: 35% ; margin-top: 7%; margin-bottom: 10%; ">
     {% csrf_token %}

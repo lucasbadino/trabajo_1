@@ -34,10 +34,10 @@
             <th scope="col">Nombre</th>
             <th scope="col">Stock</th>
             <th scope="col">Precio</th>
-            <th scope="col">Sku</th>
+
           </tr>
         </thead>      
-    {% for i in all %} 
+    {% for i in products %} 
  
     
         <tbody>
@@ -47,13 +47,13 @@
             <td>{{i.stock}}</td>
             <td>${{i.price}}</td>
             <td>{{i.sku}}</td>
-            {%if i.unic == 'd'%}
+            {%if i.category == 3%}
             <td><a class="btn btn-warning" href="/../drink/edit-drinks/{{i.id}}/" role="button">Editar</a></td>
             <td><a class="btn btn-danger" href="/../drink/delete-drinks/{{i.id}}/" role="button">Borrar</a></td>
-            {%elif i.unic == 'm'%}
+            {%elif i.category == 1%}
             <td><a class="btn btn-warning" href="/../meat/edit-meats/{{i.id}}/" role="button">Editar</a></td>
             <td><a class="btn btn-danger" href="/../meat/delete-meats/{{i.id}}/" role="button">Borrar</a></td>
-            {%elif i.unic == 'b'%}
+            {%elif i.category == 2%}
             <td><a class="btn btn-warning" href="/../bakery/edit-bakeries/{{i.id}}/" role="button">Editar</a></td>
             <td><a class="btn btn-danger" href="/../bakery/delete-bakeries/{{i.id}}/" role="button">Borrar</a></td>
             {%endif%}

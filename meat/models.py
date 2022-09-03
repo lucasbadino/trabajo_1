@@ -5,13 +5,13 @@ from random import randint
 
 class Products(models.Model):
     rand = randint(0, 2000)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique = True)
     description = models.CharField(max_length=200)
     sku = models.IntegerField(default= rand)
     price = models.FloatField()
     stock = models.IntegerField(default= 0)
     image = models.ImageField(upload_to= 'products_image_meats', blank=True, null=True)
-    unic = models.CharField(max_length=1, default='m')
+   # unic = models.CharField(max_length=1, default='m')
     
     def __str__(self):
         return self.name

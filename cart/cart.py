@@ -10,7 +10,7 @@ class Cart:
             self.cart = cart
 
     def add(self, product):
-        if product.unic=="b":
+        if product.category == 2:
             id = str(product.id)
             if id not in self.cart.keys():
                 self.cart[id]={
@@ -20,7 +20,6 @@ class Cart:
                     "price": product.price,
                     "description": product.description,
                     "quantity": 1,
-                    "product_unic" : product.unic,
                     "stock": int(product.stock),
                     "image": product.image.url,
                 }
@@ -28,7 +27,7 @@ class Cart:
                 self.cart[id]["quantity"] += 1
                 self.cart[id]["amount"] += product.price
             self.save_cart()
-        elif product.unic == "d":
+        elif product.category == 3:
             id = str(product.id)
             if id not in self.cart.keys():
                 self.cart[id] = {
@@ -41,7 +40,7 @@ class Cart:
                 self.cart[id]["quantity"] += 1
                 self.cart[id]["amount"] += product.price
             self.save_cart()
-        elif product.unic == "m":
+        elif product.category == 1:
             id = str(product.id)
             if id not in self.cart.keys():
                 self.cart[id] = {
@@ -61,26 +60,26 @@ class Cart:
 
     
     def delete(self, product):
-        if product.unic == "b":
+        if product.category== 2:
             id = str(product.id)
             if id in self.cart:
                 del self.cart[id]
                 self.save_cart()
 
-        elif product.unic == "d":
+        elif product.category == 3:
             id = str(product.id)
             if id in self.cart:
                 del self.cart[id]
                 self.save_cart()
 
-        elif product.unic == "m":
+        elif product.category == 1:
             id = str(product.id)
             if id in self.cart:
                 del self.cart[id]
                 self.save_cart()
     
     def subtract(self, product):
-        if product.unic == "b":
+        if product.category == 2:
             id = str(product.id)
             if id in self.cart.keys():
                 self.cart[id]["quantity"] -=1
@@ -88,7 +87,7 @@ class Cart:
                 if self.cart[id]["quantity"] <= 0: self.delete(product)
                 self.save_cart()
         
-        elif product.unic == "d":
+        elif product.category == 3:
             id = str(product.id)
             if id in self.cart.keys():
                 self.cart[id]["quantity"] -= 1
@@ -97,7 +96,7 @@ class Cart:
                     self.delete(product)
                 self.save_cart()
 
-        elif product.unic == "m":
+        elif product.category == 1:
             id = str(product.id)
             if id in self.cart.keys():
                 self.cart[id]["quantity"] -= 1

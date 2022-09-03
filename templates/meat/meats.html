@@ -97,113 +97,53 @@
     </div>
   </div>
 
-  <main>
-    <div class="container-fluid bg-trasparent my-4 p-3">
-      <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3" >
 
-        {% for i in all %}
-        <div class="col" style="margin:2%">
-          <div class="card h-100 shadow-sm">
-            {% if i.image %}
-            <img src='{{i.image.url}}' class="card-img-top" alt="">
-            {% else %}
-            <img
-              src='https://media.discordapp.net/attachments/1004393238276362365/1005986351855964250/coderhouse-logo.png'
-              class="card-img-top" alt="">
-            {% endif %}
-            <div class="card-body" style="margin-bottom:20%;">
-              <div class="clearfix mb-3"> <span>
-                  <h1>{{i.name}}</h1>
-                </span> <span class="float-end price-hp">
-                  <br>&dollar;{{i.price}}</span> </div>
-              <h5 class="card-title">stock: {{i.stock}}</h5>
-              <h5 class="card-title">sku: {{i.sku}}</h5>
-              <a href="#" class="btn btn-primary btn-md success" role="button" aria-pressed="true">Comprar</a>
-              <div class="text-center my-4"> <a href="{% url 'Add' i.id %}" class="btn btn-warning">Agregar al carrito</a> </div>
-              
-              {% if request.user.is_superuser and i.unic == 'd' %}
-              <a href="/../drink/edit-drinks/{{i.id}}/" class="btn btn-info btn-md active" role="button" aria-pressed="true">Editar</a>
-              <a href="/../drink/delete-drinks/{{i.id}}/" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Eliminar</a>
-              <a href="/drink/detail-drinks/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
-              {% elif request.user.is_superuser and i.unic == 'm' %}
-              
-              <a href="/../meat/edit-meats/{{i.id}}/" class="btn btn-info btn-md active" role="button" aria-pressed="true">Editar</a>
-              <a href="/../meat/delete-meats/{{i.id}}/" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Eliminar</a>
-              <a href="/../meat/detail-meats/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
-              {% elif request.user.is_superuser and i.unic == 'b' %}
-                         
-              <a href="/../bakery/edit-bakeries/{{i.id}}/" class="btn btn-info btn-md active" role="button" aria-pressed="true">Editar</a>
-              <a href="/../bakery/delete-bakeries/{{i.id}}/" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Eliminar</a>
-              <a href="/../bakery/detail-bakeries/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
-              {% elif not request.user.is_superuser and i.unic == 'd' %}
-              <a href="/drink/detail-drinks/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
-              {% elif not request.user.is_superuser and i.unic == 'm' %}
-              <a href="/../meat/detail-meats/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
-              
-              {% elif not request.user.is_superuser and i.unic == 'b' %}
-              <a href="/../bakery/detail-bakeries/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
-              
-              {% endif %}
-              
-            </div>
-            
-          </div>
-        </div>
-
-
-
-        {% endfor %}
-
-
-
-
-      </div>
-</main>
       
 {%block text%}
 
 <main>
-    <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
-        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
-{% for i in list %}
-            
-            <div class="col" style= "margin-top:-5%; margin:2%">
-                <div class="card h-100 shadow-sm" > 
-                    
-                    {% if i.image %} 
-                    <img
-                        src='{{i.image.url}}'
-                        class="card-img-top" alt="" >
-                    {% else %}
-                        <img
-                        src='https://media.discordapp.net/attachments/1004393238276362365/1005986351855964250/coderhouse-logo.png'
-                        class="card-img-top" alt="" >
-                    {% endif %}
-                    
-                    <div class="card-body">
-                        <div class="clearfix mb-3"> <span>
-                                <h1>{{i.name}}</h1>
-                            </span> <span class="float-end price-hp">
-                                <br>&dollar;{{i.price}}</span> </div>
-                        <h5 class="card-title">stock: {{i.stock}}</h5>
-                        <h5 class="card-title">sku: {{i.sku}}</h5>
-                        <div class="text-center my-4"> <a href="#" class="btn btn-warning">Comprar</a> </div>
-                        <div class="text-center my-4"> <a href="{% url 'Add' i.id %}" class="btn btn-warning">Agregar al carrito</a> </div>
-                        {% if request.user.is_superuser %}
-                        <div class="text-center my-4"> <a href="/meat/edit-meats/{{i.id}}" class="btn btn-warning">Editar</a> </div>
-                        <div class="text-center my-4"> <a href="/meat/delete-meats/{{i.id}}" class="btn btn-warning">Borrar</a> </div>
-                        {% endif %}
-                        <div class="text-center my-4"> <a href="/meat/detail-meats/{{i.id}}" class="btn btn-warning">Mas informacion</a> </div>
-                    </div>
-                </div>
-            </div>
+  <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
+      <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+        
+          {% for i in list %}
+          {%if i.category ==  1%}
+          <div class="col" style= "margin-top:-5%; margin:2%">
+              <div class="card h-100 shadow-sm"> 
+                  
+                  {% if i.image %} 
+                  <img
+                      src='{{i.image.url}}'
+                      class="card-img-top" alt="" >
+                  {% else %}
+                      <img
+                      src='https://media.discordapp.net/attachments/1004393238276362365/1005986351855964250/coderhouse-logo.png'
+                      class="card-img-top" alt="" >
+                  {% endif %}
+                  
+                  <div class="card-body">
+                      <div class="clearfix mb-3"> <span>
+                              <h1>{{i.name}}</h1>
+                          </span> <span class="float-end price-hp">
+                              <br>&dollar;{{i.price}}</span> </div>
+              
+                      <div class="text-center my-4"> <a href="#" class="btn btn-warning">Comprar</a> </div>
+                      <div class="text-center my-4"> <a href="{% url 'Add' i.id %}" class="btn btn-warning">Agregar al carrito</a> </div>
+                      {% if request.user.is_superuser %}
+                      <div class="text-center my-4"> <a href="/meat/edit-meats/{{i.id}}" class="btn btn-warning">Editar</a></div>
+                      <div class="text-center my-4"> <a href="/meat/delete-meats/{{i.id}}" class="btn btn-warning">Borrar</a></div>
+                      {% endif %}
+                      <div class="text-center my-4"> <a href="/meat/detail-meats/{{i.id}}" class="btn btn-warning">Mas informacion</a> </div>
+                  </div>
+              </div>
+          </div>
+          {%endif%}
+          {% endfor %}
+          
+      </div>
+     </div>
+     
+     </main>
 
-       
-{% endfor %}
- </div>
-</div>
-
-</main>
 
 
 

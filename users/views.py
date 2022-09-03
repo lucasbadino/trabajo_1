@@ -1,11 +1,10 @@
 
-from multiprocessing import context
 from django.shortcuts import render, redirect
 from users.forms import Form_profile
 from users.forms import User_registracion_form
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
-from coderstore.views import Products,Drinks,Bakeries
+from product.models import Products
 from users.models import *
 from django.contrib.auth.models import User
 import os
@@ -23,17 +22,13 @@ def login_request(request):
                 
                 
                 login(request, user)
-                meat = Products.objects.all()
-                drink = Drinks .objects.all()
-                bakery= Bakeries.objects.all()
-                dic = meat.union(drink, bakery)
+                all = Products.objects.all()
                 context = {	
-                    'all': dic
-                                    }
+                    'list': all
+                     }
                 if 'next' in request.POST:
                     return redirect(request.POST.get('next'))
             return render (request , 'all_products.html', context=context)
-            
                 
         form = AuthenticationForm()
         return render(request, 'user/login.html', {'error': 'Formulario invalido', 'form': form})

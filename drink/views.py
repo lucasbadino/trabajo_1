@@ -1,16 +1,16 @@
 from django.views.generic import DetailView, UpdateView
 from django.shortcuts import render, redirect
-from drink.models import  *
+from product.models import  *
 from random import randint
-from drink.forms import Form_drinks
+from product.forms import Form_product
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.utils.decorators import method_decorator
+from product.models import Products
 
 # this function was made to create the first products.
 def drinks(request):
     rand = randint(0, 2000)
-    al1 = Drinks.objects.create(name = 'Rutini', description = 'The mouthfeel combines ripe fruit with rich spices such as vanilla & chocolate imparted by oak. Great structure and smooth tannins, with a prolonged finish.', sku = rand, price = 2000, category = 'Malbec')
+    al1 = Products.objects.create(name = 'Rutini', description = 'The mouthfeel combines ripe fruit with rich spices such as vanilla & chocolate imparted by oak. Great structure and smooth tannins, with a prolonged finish.', sku = rand, price = 2000, category = 'Malbec')
     context = {
         'drink': al1
     }
@@ -19,7 +19,7 @@ def drinks(request):
 
 def list_drinks(request):
 
-    all = Drinks.objects.all()
+    all = Products.objects.all()
 
     context ={
         'list' : all
@@ -29,19 +29,14 @@ def list_drinks(request):
 @login_required
 def create_drinks(request):
     if request.method == 'POST':
-        form = Form_drinks(request.POST, request.FILES)
+        form = Form_product(request.POST, request.FILES)
         if form.is_valid():
-            Drinks.objects.create (
-			     name = form.cleaned_data['nombre'],
-			     price = form.cleaned_data['precio' ],
-                 description = form.cleaned_data['descripcion'],
-                 stock = form.cleaned_data['stock'],
-                 image = form.cleaned_data['imagen'],
-							)
-        return redirect(list_drinks)
+         form.save()
+         return redirect(list_drinks)
+      
     elif request.method == 'GET':
         if request.user.is_superuser:
-            form = Form_drinks
+            form = Form_product
             context = {
                 'form': form
             }
@@ -50,8 +45,8 @@ def create_drinks(request):
             return redirect("login")
 
 class Update_drinks(LoginRequiredMixin, UpdateView):
-    model = Drinks
-    fields = ['name','description', 'sku', 'price','image']
+    model = Products
+    fields = ['name','description', 'price','image','category']
     template_name = 'drink/edit_drinks.html'
     success_url = '/all/'
 
@@ -59,17 +54,17 @@ class Update_drinks(LoginRequiredMixin, UpdateView):
 def delete_drinks(request, pk):
     if request.method == 'GET':
         if request.user.is_superuser:
-            product = Drinks.objects.get(pk=pk)
+            product = Products.objects.get(pk=pk)
             context = {'product': product}
             return render(request, 'drink/delete_drinks.html', context=context)
         else:
             return redirect("login")
     elif request.method == 'POST':
-        product = Drinks.objects.get(pk=pk)
+        product = Products.objects.get(pk=pk)
         product.delete()
         return redirect(list_drinks)
 
 class Detail_drinks(LoginRequiredMixin , DetailView):
-    model = Drinks
+    model = Products
     template_name = 'drink/detail_drinks.html'
 

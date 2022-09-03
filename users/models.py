@@ -1,9 +1,6 @@
-import email
-from email.mime import image
-from pyexpat import model
 from django.db import models
 
-# Create your models here.
+
 class User_profile(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE, related_name='profile')#restrict(no deja borrar el usuario) 
     email = models.EmailField(max_length=100, blank=True)

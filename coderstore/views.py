@@ -1,7 +1,6 @@
-from django.shortcuts import render, redirect
-from meat.models import Products
-from drink.models import Drinks
-from bakery.models import Bakeries
+from django.shortcuts import render
+from product.models import Products
+
 
 def home_page(request):
     return render(request, "home_page.html", context={})
@@ -9,12 +8,9 @@ def home_page(request):
 
 def search_products(request):
    search = request.GET['search']
-   meat = Products.objects.filter(name__icontains = search)
-   drink = Drinks .objects.filter(name__icontains = search)
-   bakery= Bakeries.objects.filter(name__icontains = search)
-   dic = meat.union(drink, bakery)
+   all = Products.objects.filter(name__icontains = search)
    context = {	
-       'meat': dic
+       'all': all
                      }
    return render(request, 'search_product.html', context = context)
 
@@ -22,12 +18,9 @@ def index(request):
    return render(request,'home_page.html'  )
    
 def all_products(request):
-   meat = Products.objects.all()
-   drink = Drinks .objects.all()
-   bakery= Bakeries.objects.all()
-   dic = meat.union(drink, bakery)
+   all = Products.objects.all()
    context = {	
-       'all': dic
+       'list': all
                      }
    return render(request, 'all_products.html', context = context)
 

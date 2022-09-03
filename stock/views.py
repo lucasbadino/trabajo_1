@@ -1,19 +1,11 @@
 from django.shortcuts import render
+from product.models import Products
 
-# Create your views here.
-from django.shortcuts import render
-from bakery.models import Bakeries
-from drink.models import Drinks
-
-from meat.models import Products
 
 def stock(request):
-        meat = Products.objects.all()
-        drink = Drinks .objects.all()
-        bakery= Bakeries.objects.all()
-        dic = meat.union(drink, bakery)
+        products = Products.objects.all()
         context = {	
-            'all': dic
+            'products': products
                             }
         return render(request, 'stock.html', context = context)
     

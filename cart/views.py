@@ -1,53 +1,27 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from meat.models import Products
-from bakery.models import Bakeries
-from drink.models import Drinks
+from django.shortcuts import render, redirect
 from cart.cart import Cart
-# Create your views here.
+from product.models import Products
+from django.contrib.auth.decorators import login_required
 
 
-
-
-
-def add_product(request, product_id):
-    cart = Cart(request)
-    try: 
-        product1 = get_object_or_404(Products, id= product_id)
-        
-    except:
-        try:
-            product1 = get_object_or_404(Drinks, id= product_id) 
-        except:
-            product1 = get_object_or_404(Bakeries, id= product_id)
-    
-    cart.add(product1)
-    return redirect("test")    
-
+def add_product(request,product_id):
+    cart=Cart(request)
+    product=Products.objects.get(id=product_id)
+    cart.add(product)
+    return redirect ("test")
+  
+  
 def delete_product(request, product_id):
     cart = Cart(request)
-    try: 
-        product1 = get_object_or_404(Products, id= product_id)
-        
-    except:
-        try:
-            product1 = get_object_or_404(Drinks, id= product_id) 
-        except:
-            product1 = get_object_or_404(Bakeries, id= product_id)
-    cart.delete(product1)
+    product=Products.objects.get(id=product_id)
+    cart.delete(product)
     return redirect("test")
 
 
 def subtract_product(request, product_id):
     cart = Cart(request)
-    try: 
-        product1 = get_object_or_404(Products, id= product_id)
-        
-    except:
-        try:
-            product1 = get_object_or_404(Drinks, id= product_id) 
-        except:
-            product1 = get_object_or_404(Bakeries, id= product_id)
-    cart.subtract(product1)
+    product=Products.objects.get(id=product_id)
+    cart.subtract(product)
     return redirect("test")
 
 def clear_cart(request):
@@ -59,10 +33,10 @@ def clear_cart(request):
 def test(request):
     return render(request, "prueba.html")
 
+@login_required
 def checkout(request):
     total = 0
-    if request.user.is_authenticated:
-        if "cart" in request.session.keys():
+    if "cart" in request.session.keys():
             for key, value in request.session["cart"].items():
                 total += int(value["amount"])
                 context = {
@@ -71,8 +45,3 @@ def checkout(request):
     return render(request, "cart/checkout.html" , context=context)
     
 
-# def add_product(request,pk):
-#     cart=Cart(request)
-#     product=Product.objects.get(id=pk)
-#     cart.add(product=product)
-#     return redirect ('/Productos/Shop_single/%d/?valido'%pk)
