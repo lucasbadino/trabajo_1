@@ -6,7 +6,7 @@ class Products(models.Model):
     description = models.CharField(max_length=200)
     price= models.FloatField()
     stock = models.IntegerField(default= 0)
-    image = models.ImageField(upload_to= 'products_image_drinks', blank=True, null=True)
+    image = models.ImageField(upload_to= 'products_image', blank=True, null=True)
    
     
     

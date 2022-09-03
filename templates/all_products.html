@@ -14,12 +14,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
     integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
   <title>
-  Productos
+    Productos
   </title>
 
 </head>
 
-<body style="background-image:url('https://img.freepik.com/free-vector/smooth-white-wave-background_52683-55288.jpg?w=2000') ;">
+<body
+  style="background-image:url('https://img.freepik.com/free-vector/smooth-white-wave-background_52683-55288.jpg?w=2000') ;">
   <nav class="navbar navbar-expand-md navbar-light bg-faded">
     <a href="/" class="navbar-brand">CoderStore</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar5">
@@ -33,20 +34,21 @@
         <li class="nav-item"><a class="nav-link" href="/bakery/bakeries/">Panderia</a></li>
       </ul>
       {% if request.user.is_authenticated and request.user.is_superuser %}
-        <li class="nav-item"><a class="nav-link" style="color: rgba(0, 0, 0, 0.562);" href="/stock/stock/">Stock</a></li>
-      
+      <li class="nav-item"><a class="nav-link" style="color: rgba(0, 0, 0, 0.562);" href="/stock/stock/">Stock</a></li>
+
       {%endif%}
       <form class="mx-2 my-auto d-inline w-100" action="/search/" method="GET">
         <div class="input-group">
           <input type="text" class="form-control border border-right-0 mr-auto my-2 my-lg-0 s"
             placeholder="&#128269Search..." viewBox="0 0 16 16" aria-label="Search" name="search">
           <span class="input-group-append">
-            
+
           </span>
         </div>
       </form>
 
-      <li class="nav-item" ><a class="nav-link" style="color: rgba(0, 0, 0, 0.562);"href="/contact/contact/">Contacto</a></li>
+      <li class="nav-item"><a class="nav-link" style="color: rgba(0, 0, 0, 0.562);"
+          href="/contact/contact/">Contacto</a></li>
       {% if request.user.is_authenticated %}
       <div id="container">
         <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll">
@@ -78,10 +80,11 @@
           <div class="cart-line-3" style="background-color: #E5E9EA"></div>
           <div class="cart-wheel" style="background-color: #E5E9EA"></div>
         </div>
-        
+
         {%endif%}
       </div>
-      <a href="/cart/test/"><img alt="Carrito" src="https://cdn-icons-png.flaticon.com/512/107/107831.png" width="30" height="20"></a>
+      <a href="/cart/test/"><img alt="Carrito" src="https://cdn-icons-png.flaticon.com/512/107/107831.png" width="30"
+          height="20"></a>
       </ul>
       </ul>
     </div>
@@ -97,147 +100,129 @@
     </div>
   </div>
 
-  <main>
-    <div class="container-fluid bg-trasparent my-4 p-3">
-      <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3" >
-
+  <div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-center row">
+      <div class="col-md-10">
         {% for i in list %}
-        <div class="col" style="margin:2%">
-          <div class="card h-100 shadow-sm">
-            {% if i.image %}
-            <img src='{{i.image.url}}' class="card-img-top" alt="">
-            {% else %}
-            <img
-              src='https://media.discordapp.net/attachments/1004393238276362365/1005986351855964250/coderhouse-logo.png'
-              class="card-img-top" alt="">
-            {% endif %}
-            <div class="card-body" style="margin-bottom:20%;">
-              <div class="clearfix mb-3"> <span>
-                  <h1>{{i.name}}</h1>
-                </span> <span class="float-end price-hp">
-                  <br>&dollar;{{i.price}}</span> </div>
-              <h5 class="card-title">stock: {{i.stock}}</h5>
-              
-              <a href="#" class="btn btn-primary btn-md success" role="button" aria-pressed="true">Comprar</a>
-              <div class="text-center my-4"> <a href="{% url 'Add' i.id %}" class="btn btn-warning">Agregar al carrito</a> </div>
-              
-              {% if request.user.is_superuser and i.category == 3 %}
-              <a href="/../drink/edit-drinks/{{i.id}}/" class="btn btn-info btn-md active" role="button" aria-pressed="true">Editar</a>
-              <a href="/../drink/delete-drinks/{{i.id}}/" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Eliminar</a>
-              <a href="/drink/detail-drinks/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
-              
-              {% elif request.user.is_superuser and i.category == 1%}
-              
-              <a href="/../meat/edit-meats/{{i.id}}/" class="btn btn-info btn-md active" role="button" aria-pressed="true">Editar</a>
-              <a href="/../meat/delete-meats/{{i.id}}/" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Eliminar</a>
-              <a href="/../meat/detail-meats/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
-              {% elif request.user.is_superuser and i.category == 2 %}
-                         
-              <a href="/../bakery/edit-bakeries/{{i.id}}/" class="btn btn-info btn-md active" role="button" aria-pressed="true">Editar</a>
-              <a href="/../bakery/delete-bakeries/{{i.id}}/" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Eliminar</a>
-              <a href="/../bakery/detail-bakeries/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
-              {% elif not request.user.is_superuser and i.category == 3 %}
-              <a href="/drink/detail-drinks/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
-              {% elif not request.user.is_superuser and i.category == 1 %}
-              <a href="/../meat/detail-meats/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
-              
-              {% elif not request.user.is_superuser and i.category == 2 %}
-              <a href="/../bakery/detail-bakeries/{{i.id}}/" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Detalles</a>
-             
-              {% endif %}
-              
+        <div class="row p-2 bg-white border rounded" style="background-image:url('https://img.freepik.com/free-vector/smooth-white-wave-background_52683-55288.jpg?w=2000') ;margin-top:1% ;margin-bottom:1%">
+          {% if i.image %}
+          <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image "style="max-height:180px"
+              src="{{i.image.url}}"></div>
+
+          {% else %}
+          <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
+              src="https://media.discordapp.net/attachments/1004393238276362365/1005986351855964250/coderhouse-logo.png"></div>
+          {% endif %}
+          <div class="col-md-6 mt-1">
+            <h3>{{i.name}}</h3>
+            <div class="d-flex flex-row">
+              <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                  class="fa fa-star"></i></div><span><h5>{{i.description}}</h5></span>
             </div>
-            
+            <div class="mt-1 mb-1 spec-1"></div>
+            <div class="mt-1 mb-1 spec-1"><h6>Stock: {{i.stock}}
+            </h6></div>
+            <p class="text-justify text-truncate para mb-0"><br><br></p>
+          </div>
+          <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+            <div class="d-flex flex-row align-items-center">
+              <h4 class="mr-2 col d-flex justify-content-center" >${{i.price}}</h4>
+                        </div>
+            <h6 class="text-success">Envio gratis</h6>
+            <div class="d-flex flex-column mt-4">
+              <a href="/bakery/detail-bakeries/{{i.id}}"class="btn btn-primary btn-sm"
+              ><button class="btn btn-primary btn-sm"
+                type="button">Detalles</button></a>
+                
+                <a href="{% url 'Add' i.id %}"class="btn btn-light btn-sm mt-2"><button class="btn btn-outline-primary btn-sm mt-2" type="button">Agregar al carrito</button></a>
+              </div>
+                
           </div>
         </div>
-
-
-
         {% endfor %}
-
-
-
-
       </div>
-</main>
-      <!-- Footer -->
-      <footer class="text-center text-lg-start bg-light text-muted">
-         <!-- Section: Links  -->
-        <section class="">
-          <div class="container text-center text-md-start mt-5">
-            <!-- Grid row -->
-            <div class="row mt-3">
-              <!-- Grid column -->
-              <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                <!-- Content -->
-                <h6 class="text-uppercase fw-bold mb-4">
-                  <i class="fas fa-gem me-3"></i>CoderStore
-                </h6>
-                <p>
-                  Somos una empresa familiar con años de experiencia en el rubro, ofreciendo los mejores productos del mercado
-                </p>
-              </div>
-              <!-- Grid column -->
+    </div>
+  </div>
 
-              <!-- Grid column -->
-              <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                <!-- Links -->
-                <h6 class="text-uppercase fw-bold mb-4">
-                  Productos
-                </h6>
-                <p>
-                  <a href="/../meat/meats/" class="text-reset">Carnes</a>
-                </p>
-                <p>
-                  <a href="/bakery/bakeries/" class="text-reset">Panderia</a>
-                </p>
-                <p>
-                  <a href="/drink/drinks/" class="text-reset">Bebidas</a>
-                </p>
-              </div>
-              <!-- Grid column -->
-
-              <!-- Grid column -->
-              <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                <!-- Links -->
-                <h6 class="text-uppercase fw-bold mb-4">
-                  Links
-                </h6>
-                <p>
-                  <a href="#!" class="text-reset">About us</a>
-                </p>
-              </div>
-              <!-- Grid column -->
-
-              <!-- Grid column -->
-              <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                <!-- Links -->
-                <h6 class="text-uppercase fw-bold mb-4">Contacto</h6>
-
-                <p><i class="fas fa-home me-3"></i> Buenos Aires, BS 1000, AR</p>
-                <p>
-                  <i class="fas fa-envelope me-3"></i>
-                  info@coderstore.com
-                </p>
-                <p><i class="fas fa-phone me-3"></i> + 54 9 351 456987</p>
-                <p><i class="fas fa-print me-3"></i> + 54 9 351 456987</p>
-                <a href="/contact/contact" class="text-reset">Contactenos</a>
-              </div>
-              <!-- Grid column -->
-            </div>
-            <!-- Grid row -->
+  <!-- Footer -->
+  <footer class="text-center text-lg-start bg-light text-muted">
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              <i class="fas fa-gem me-3"></i>CoderStore
+            </h6>
+            <p>
+              Somos una empresa familiar con años de experiencia en el rubro, ofreciendo los mejores productos del
+              mercado
+            </p>
           </div>
-        </section>
-        <!-- Section: Links  -->
+          <!-- Grid column -->
 
-        <!-- Copyright -->
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-          © 2022 Copyright:
-          <a class="text-reset fw-bold" href="/../">CoderStore</a>
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Productos
+            </h6>
+            <p>
+              <a href="/../meat/meats/" class="text-reset">Carnes</a>
+            </p>
+            <p>
+              <a href="/bakery/bakeries/" class="text-reset">Panderia</a>
+            </p>
+            <p>
+              <a href="/drink/drinks/" class="text-reset">Bebidas</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Links
+            </h6>
+            <p>
+              <a href="#!" class="text-reset">About us</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contacto</h6>
+
+            <p><i class="fas fa-home me-3"></i> Buenos Aires, BS 1000, AR</p>
+            <p>
+              <i class="fas fa-envelope me-3"></i>
+              info@coderstore.com
+            </p>
+            <p><i class="fas fa-phone me-3"></i> + 54 9 351 456987</p>
+            <p><i class="fas fa-print me-3"></i> + 54 9 351 456987</p>
+            <a href="/contact/contact" class="text-reset">Contactenos</a>
+          </div>
+          <!-- Grid column -->
         </div>
-        <!-- Copyright -->
-      </footer>
-      <!-- Footer -->
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2022 Copyright:
+      <a class="text-reset fw-bold" href="/../">CoderStore</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

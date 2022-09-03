@@ -28,7 +28,7 @@
   </thead>
   <tbody>
   {% if request.session.cart.items %}
-  {% for key, value in request.session.cart.items %}
+  {% for  value in request.session.cart.items %}
     <tr>
       <td>{{value.name}}</td>
       <td>{{value.amount}}</td>
