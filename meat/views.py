@@ -80,3 +80,4 @@ def delete_meats(request, pk):
 class Detail_Products(LoginRequiredMixin, DetailView):
     model = Products
     template_name = 'meat/detail_meats.html'
+    login_url = 'login'

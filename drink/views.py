@@ -75,4 +75,6 @@ def delete_drinks(request, pk):
 class Detail_drinks(LoginRequiredMixin , DetailView):
     model = Products
     template_name = 'drink/detail_drinks.html'
+    login_url = 'login'
+    
 

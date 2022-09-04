@@ -33,15 +33,20 @@ def clear_cart(request):
 def cart(request):
     return render(request, "cart/cart.html")
 
-@login_required
+
 def checkout(request):
-    total = 0
-    if "cart" in request.session.keys():
+    if request.user.is_authenticated:
+        total = 0
+        context = {
+                    'product' : total
+                }
+        if "cart" in request.session.keys():
             for key, value in request.session["cart"].items():
                 total += int(value["amount"])
                 context = {
                     'product' : total
                 }
-    return render(request, "cart/checkout.html" , context=context)
-
+        return render(request, "cart/checkout.html" , context=context)
+    else:
+        return redirect('login')
 

@@ -74,3 +74,4 @@ def delete_bakeries(request, pk):
 class Detail_bakeries(LoginRequiredMixin, DetailView):
     model = Products
     template_name = 'bakery/detail_bakeries.html'
+    login_url = 'login'
