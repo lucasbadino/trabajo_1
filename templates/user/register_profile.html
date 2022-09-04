@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{%block title%}
+        Register
+    {%endblock%}
+
+        {%block text%}
+
+<center><h1>Hola {{request.user.username}} como eres nuevo en la tienda, <br> te pediremos que completes tu perfil por unica vez</h1></center>
+<div class="container" style="align-items:center ; max-width:500px ;">
+<form action=""method= 'POST'enctype="multipart/form-data">
+{% csrf_token %}
+
+    {{form | crispy}}
+
+    
+
+<button type="submit" class="btn btn-primary ">registrar</button>
+</form>
+<p style="color: red;">{{errors}}</p>
+</div>
+
+  
+{% endblock %}

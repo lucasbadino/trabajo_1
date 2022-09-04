@@ -23,3 +23,10 @@ class Form_profile(forms.Form):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput, required=False)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput, required=False)
     imagen = forms.ImageField(required=False)
+
+
+class Form_user_p(forms.Form):
+    email = forms.EmailField(max_length=100)
+    phone = forms.CharField(max_length=20)
+    address =forms.CharField(max_length=100)
+    image = forms.ImageField(required=False)

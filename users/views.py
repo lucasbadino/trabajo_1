@@ -1,6 +1,6 @@
 
 from django.shortcuts import render, redirect
-from users.forms import Form_profile
+from users.forms import Form_profile, Form_user_p
 from users.forms import User_registracion_form
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
@@ -19,6 +19,8 @@ def login_request(request):
             password = form.cleaned_data.get('password')
             user = authenticate(username = username, password = password)
             if user is not None:
+                
+                
                 login(request, user)
                 all = Products.objects.all()
                 context = {	
@@ -53,6 +55,31 @@ def register_request(request):
         }
         return render(request, 'user/register.html', context= context)
 
+def register_profile(request):
+    if request.method == 'POST':   
+        form = Form_user_p(request.POST, request.FILES)
+        if form.is_valid():
+            User_profile.objects.create(
+                    user_id = request.user.id,
+                    email = form.cleaned_data['email'],
+                    phone = form.cleaned_data['phone'],
+                    image = form.cleaned_data['image'],
+                    address = form.cleaned_data['address'],
+                )
+            return redirect('inicio')
+        else:
+            context = {'errors': form.errors}
+            form = Form_user_p
+            context ['form'] = form
+            return render(request, 'user/register_profile.html', context=context)
+  
+    elif request.method == 'GET':
+        form = Form_user_p
+        context = {
+            'form' : form
+        }
+        return render(request, 'user/register_profile.html', context= context)
+
 def user_profile(request, pk):
 
     if request.method == 'POST':
@@ -60,7 +87,7 @@ def user_profile(request, pk):
         form = Form_profile(request.POST , request.FILES)
         if form.is_valid():
             profile = User.objects.get(id=pk)
-            profile2 = User_profile.objects.get()
+            profile2 = User_profile.objects.get(user_id = pk)
             profile.first_name = form.cleaned_data['nombre']
             profile.last_name = form.cleaned_data['apellido']
             profile.email = form.cleaned_data['email']
@@ -87,7 +114,7 @@ def user_profile(request, pk):
         if request.user.is_authenticated:
        
             profile = User.objects.get(id=pk)
-            profile2 = User_profile.objects.get()
+            profile2 = User_profile.objects.get(user_id = pk)
             form = Form_profile (initial={
                 #'username': profile.username,
                 'nombre': profile.first_name,
@@ -109,8 +136,10 @@ def confirmation(request):
 
 def profile_complete(request, pk ):
     profile2 = User.objects.get(id = pk)
-    profile = User_profile.objects.get()
-
+    try:
+        profile = User_profile.objects.get(user_id = pk)
+    except:
+        return redirect('register_profile')
     context = {
         'profile': profile
     }
