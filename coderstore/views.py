@@ -24,3 +24,7 @@ def all_products(request):
                      }
    return render(request, 'all_products.html', context = context)
 
+
+def about_us(request):
+   
+   return render(request, 'about.html', context={})
