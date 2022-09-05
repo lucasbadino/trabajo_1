@@ -15,6 +15,9 @@
 **repo github**
 [GitHub](https://github.com/lucasbadino/trabajo_1)
 
+**VIDEO DESCRIPTIVO**
+[YouTube](https://youtu.be/DbLyT8T7-wk)
+
 
 **Tabla de Contenidos**
 
