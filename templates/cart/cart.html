@@ -66,7 +66,7 @@ Carrito
 
 
                   <!-- Quantity -->
-                  <p></p>
+                  
                   <div class="d-flex mb-1">
 
                     <a href="{% url 'Sub' value.product_id %}">
@@ -76,15 +76,19 @@ Carrito
                         <i class="fas fa-minus">-</i>
                       </button>
                     </a>
+                    
                     <div class="form-outline ">
                       <p class="form-control">{{value.quantity}}</p>
                     </div>
-
+                   
                     <a href="{% url 'Add' value.product_id %}">
+                     
                       <button class="btn btn-success ">
+                        
                         <i class="fas fa-plus">+</i>
                       </button>
                     </a>
+                   
 
                   </div>
                   <!-- Quantity -->

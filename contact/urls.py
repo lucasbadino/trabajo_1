@@ -3,8 +3,6 @@ from contact.views import contact
 
 
 
-
-
 urlpatterns = [
     path('contact/', contact, name= 'contact'),
     ]

@@ -1,4 +1,3 @@
-
 from django.views.generic import DetailView, UpdateView
 from django.shortcuts import render, redirect
 from product.models import  *
